@@ -1,0 +1,35 @@
+<nav class="navbar top-navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      {% if request.path == '/' %}{% else %}<a href="/"><i class="bi-arrow-left me-4 d-lg-none"></i></a>{% endif %} {% if request.path == '/' %}Security App{% else %}{{title}}{% endif %}
+    </div>
+    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+      <i class="bi-chevron-double-down"></i>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-lg-none">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Notifications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Switch account</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Report</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown01">
+            <li><a class="dropdown-item" href="{% url 'laporan_patroli' %}">Daily</a></li>
+            <li><a class="dropdown-item" href="#">Monthly</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a href="/admin" target="_blank" class="btn btn-secondary bg-gradient ms-auto" type="submit">Search</a>
+    </div>
+  </div>
+</nav>

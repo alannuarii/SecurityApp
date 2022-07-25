@@ -1,0 +1,12 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'includes/styles.html' %} {% block title %}{% endblock title %}
+    <!-- Favicons -->
+    <!-- <link href="" rel="icon" /> -->
+  </head>
+  <body>
+    {% include 'includes/navbar.html' %}{% block content %}{% endblock content %}{% include 'includes/scripts.html' %}
+  </body>
+</html>

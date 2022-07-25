@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container form-input">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <h3 class="text-center border-bottom pb-2">FORM INPUT CCTV</h3>
+      <div class="card mt-4">
+        <div class="mb-3">
+          <label for="formGroupExampleInput" class="form-label">Nama Security</label>
+          {% for name in names %}
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="{{name.id}}" id="flexCheckDefault" />
+            <label class="form-check-label" for="flexCheckDefault"> {{name.nama_security}} </label>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Lokasi Pantau CCTV</label>
+          <div class="form-check">
+            <input class="form-check-input semua" type="radio" name="lokasi" id="flexRadioDefault1" />
+            <label class="form-check-label" for="flexRadioDefault1"> Semua Titik </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input tertentu" type="radio" name="lokasi" id="flexRadioDefault2" />
+            <label class="form-check-label" for="flexRadioDefault2"> Titik Tertentu </label>
+            <div></div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Kondisi</label>
+          <div class="form-check">
+            <input class="form-check-input aman" type="radio" name="kondisi" id="flexRadioDefault1" />
+            <label class="form-check-label" for="flexRadioDefault1"> Aman </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input tidak-aman" type="radio" name="kondisi" id="flexRadioDefault2" />
+            <label class="form-check-label" for="flexRadioDefault2"> Tidak Aman </label>
+            <div></div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <input type="button" value="Reset" class="btn btn-secondary bg-gradient me-1" id="sig-clearBtn" />
+          <button id="sig-submitBtn" type="submit" class="btn btn-primary bg-gradient">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}

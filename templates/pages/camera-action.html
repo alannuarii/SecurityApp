@@ -1,0 +1,133 @@
+{% extends 'layouts/base.html' %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container camera-action">
+  <div class="row">
+    <div class="col">
+      <div class="d-flex justify-content-center">
+        <video autoplay height="480" width="360" id="video"></video>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-secondary bg-gradient rounded-circle" id="btnPlay">
+          <i class="bi-play"></i>
+        </button>
+        <button class="btn btn-secondary bg-gradient rounded-circle" id="btnPause">
+          <i class="bi-pause"></i>
+        </button>
+        <form action="" method="post" class="d-inline mx-2">
+          {% csrf_token %}
+          <input type="hidden" name="foto" class="foto" value="" required />
+          <button class="btn btn-danger bg-gradient rounded-circle" id="btnScreenshot" onchange="this.form.submit()">
+            <i class="bi-camera"></i>
+          </button>
+        </form>
+        <button class="btn btn-secondary bg-gradient rounded-circle" id="btnChangeCamera">
+          <i class="bi-arrow-repeat"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div id="screenshots"></div>
+    </div>
+  </div>
+  <canvas class="d-none" id="canvas"></canvas>
+  <script>
+    (function () {
+      if (!"mediaDevices" in navigator || !"getUserMedia" in navigator.mediaDevices) {
+        alert("Camera API is not available in your browser");
+        return;
+      }
+
+      // get page elements
+      const video = document.querySelector("#video");
+      const btnPlay = document.querySelector("#btnPlay");
+      const btnPause = document.querySelector("#btnPause");
+      const btnScreenshot = document.querySelector("#btnScreenshot");
+      const btnChangeCamera = document.querySelector("#btnChangeCamera");
+      const canvas = document.querySelector("#canvas");
+      const devicesSelect = document.querySelector("#devicesSelect");
+      const foto = document.querySelector(".foto");
+
+      // video constraints
+      const constraints = {
+        video: {
+          width: {
+            min: 1280,
+            ideal: 1920,
+            max: 2560,
+          },
+          height: {
+            min: 720,
+            ideal: 1080,
+            max: 1440,
+          },
+        },
+      };
+
+      // use front face camera
+      let useFrontCamera = true;
+
+      // current video stream
+      let videoStream;
+
+      // handle events
+      // play
+      btnPlay.addEventListener("click", function () {
+        video.play();
+        btnPause.style.display = "inline";
+        btnPlay.style.display = "none";
+      });
+
+      // pause
+      btnPause.addEventListener("click", function () {
+        video.pause();
+        btnPause.style.display = "none";
+        btnPlay.style.display = "inline";
+      });
+
+      // take screenshot
+      btnScreenshot.addEventListener("click", function () {
+        const img = document.createElement("img");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext("2d").drawImage(video, 0, 0);
+        img.src = canvas.toDataURL("image/png");
+        foto.value = img.src;
+      });
+
+      // switch camera
+      btnChangeCamera.addEventListener("click", function () {
+        useFrontCamera = !useFrontCamera;
+
+        initializeCamera();
+      });
+
+      // stop video stream
+      function stopVideoStream() {
+        if (videoStream) {
+          videoStream.getTracks().forEach((track) => {
+            track.stop();
+          });
+        }
+      }
+
+      // initialize
+      async function initializeCamera() {
+        stopVideoStream();
+        constraints.video.facingMode = useFrontCamera ? "user" : "environment";
+
+        try {
+          videoStream = await navigator.mediaDevices.getUserMedia(constraints);
+          video.srcObject = videoStream;
+        } catch (err) {
+          alert("Could not access the camera");
+        }
+      }
+
+      initializeCamera();
+    })();
+  </script>
+</main>
+{% endblock content %}

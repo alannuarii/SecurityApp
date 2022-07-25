@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html' %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container home d-lg-flex justify-content-lg-center align-items-lg-center">
+  <div class="row g-lg-5">
+    <div class="col-6 col-lg-4 mb-5 mb-lg-0">
+      <a href="{% url 'form_tamu' %}" class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-book text-light"></i></a>
+      <h6 class="text-center mt-2">Buku Tamu</h6>
+    </div>
+    <div class="col-6 col-lg-4 mb-5 mb-lg-0">
+      <a href="{% url 'form_patroli' %}" class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-arrow-repeat text-light"></i></a>
+      <h6 class="text-center mt-2">Form Patroli</h6>
+    </div>
+    <div class="col-6 col-lg-4 mb-5 mb-lg-0">
+      <a href="{% url 'form_apel' %}" class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-people text-light"></i></a>
+      <h6 class="text-center mt-2">Form Apel</h6>
+    </div>
+    <div class="col-6 col-lg-4 mb-5 mb-lg-0">
+      <a href="{% url 'form_cctv' %}" class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-camera-video text-light"></i></a>
+      <h6 class="text-center mt-2">Form CCTV</h6>
+    </div>
+    <div class="col-6 col-lg-4 mb-5 mb-lg-0 d-lg-none">
+      <a href="{% url 'emergency_call' %}" class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-telephone-forward text-light"></i></a>
+      <h6 class="text-center mt-2">Emergency Call</h6>
+    </div>
+    <div class="col-6 col-lg-4 mb-5 mb-lg-0">
+      <a href="{% url 'sop' %}" class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-check2-circle text-light"></i></a>
+      <h6 class="text-center mt-2">SOP</h6>
+    </div>
+  </div>
+</main>
+<nav class="navbar bot-navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark d-lg-none">
+  <div class="container-fluid position-relative">
+    <a href="{% url 'camera_action' %}" class="btn btn-primary bg-gradient rounded-circle position-absolute top-0 start-50 translate-middle"><i class="bi-camera"></i></a>
+  </div>
+</nav>
+{% endblock content %}

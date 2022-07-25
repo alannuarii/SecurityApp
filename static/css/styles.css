@@ -1,0 +1,181 @@
+:root {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
+main {
+  padding-top: 70px;
+  padding-bottom: 15px;
+}
+
+/* NAVBAR  */
+.nav-scroller .nav {
+  color: rgba(255, 255, 255, 0.75);
+}
+.nav-scroller .nav-link {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+.nav-scroller .nav-link:hover {
+  color: #007bff;
+}
+.nav-scroller .active {
+  font-weight: 500;
+  color: #343a40;
+}
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* HOME */
+.home {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+.home .card {
+  width: 150px;
+  height: 150px;
+  border-radius: 35px;
+}
+.home .card i {
+  font-size: 80px;
+}
+
+/* FORM INPUT ALL */
+.form-input .card {
+  padding: 20px 50px;
+  border-radius: 20px;
+}
+/* .form-input .foto-tamu {
+  padding: 30px;
+} */
+.form-input #my_camera {
+  width: 240px;
+  height: 320px;
+}
+.form-input #result i {
+  font-size: 70px;
+}
+.form-input .capture {
+  width: 80px;
+}
+.form-input .capture i {
+  font-size: 20px;
+}
+
+/* EMERGENCY CALL*/
+.emergency-call .card .card-header {
+  height: 100px;
+}
+
+/* CAMERA ACTION */
+.camera-action #btnPlay {
+  display: none;
+}
+.camera-action i {
+  font-size: 30px;
+}
+
+/* LAPORAN PATROLI */
+.laporan-patroli .card {
+  padding: 20px 50px;
+  border-radius: 20px;
+}
+.laporan-patroli i {
+  font-size: 20px;
+}
+
+/* LAPORAN PATROLI SHIFTY  */
+.laporan-patroli-shift .card-1 {
+  padding: 20px 50px;
+  border-radius: 20px;
+}
+
+/* FOR MOBILE  */
+@media screen and (max-width: 992px) {
+  .offcanvas-collapse {
+    position: fixed;
+    top: 56px; /* Height of navbar */
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: #343a40;
+    transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+  .offcanvas-collapse.open {
+    visibility: visible;
+    transform: translateX(-100%);
+  }
+  .navbar-collapse button {
+    display: none;
+  }
+
+  /* HOME  */
+  .home {
+    height: auto;
+    padding-top: 80px;
+  }
+  .home .card {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+  }
+  .home .card i {
+    font-size: 50px;
+  }
+  .bot-navbar .container-fluid {
+    height: 35px;
+  }
+  .bot-navbar a {
+    border: 7px solid #fff;
+  }
+  .bot-navbar .bi-camera {
+    font-size: 30px;
+  }
+
+  /* FORM INPUT ALL */
+  .form-input .card {
+    padding: 20px;
+  }
+
+  /* SELAMAT DATANG */
+  .selamat-datang .cp p,
+  .selamat-datang .cp a {
+    margin-top: -7px;
+    font-size: 15px;
+  }
+
+  /* LPOARN PATROLI  */
+  .laporan-patroli .card {
+    padding: 20px;
+  }
+
+  /* LPOARN PATROLI SHIFT  */
+  .laporan-patroli-shift .card-1 {
+    padding: 20px;
+  }
+}

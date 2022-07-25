@@ -1,0 +1,101 @@
+{% extends 'layouts/base.html' %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container form-input">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <h3 class="text-center border-bottom pb-2">FORM INPUT PATROLI</h3>
+      <div class="card mt-4">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Nama Security</label>
+            <select class="form-select" aria-label="Default select example" name="nama_security_id">
+              <option selected disabled>Pilih nama security</option>
+              {% for name in names %}
+              <option value="{{name.id}}">{{name.nama_security}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Lokasi Patroli</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Masukkan lokasi patroli" name="lokasi" />
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Kondisi</label>
+            <div class="form-check">
+              <input class="form-check-input aman" type="radio" name="kondisi" id="flexRadioDefault1" value="Aman" />
+              <label class="form-check-label" for="flexRadioDefault1"> Aman </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input tidak-aman" type="radio" name="kondisi" id="flexRadioDefault2" value="" />
+              <label class="form-check-label" for="flexRadioDefault2"> Tidak Aman </label>
+              <div></div>
+            </div>
+          </div>
+          <div class="mb-3 d-flex flex-column align-items-center mx-auto foto-tamu border rounded-2 p-4 w-100">
+            <div id="result" class="text-center"></div>
+            <div id="my_camera"></div>
+            <div class="btn btn-danger bg-gradient capture rounded-pill mt-1"><i class="bi-camera"></i></div>
+            <input type="hidden" name="foto" class="foto" value="" required />
+          </div>
+          <div class="text-center tombol-tamu"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/static/vendor/webcamjs/webcam.js"></script>
+
+  <script>
+    const camera = document.getElementById("my_camera");
+    const capture = document.querySelector(".capture");
+    const foto = document.querySelector(".foto");
+    const result = document.getElementById("result");
+    const tombol = document.querySelector(".tombol-tamu");
+
+    Webcam.set({
+      width: 240,
+      height: 320,
+      dest_width: 240,
+      dest_height: 320,
+      image_format: "jpeg",
+      jpeg_quality: 90,
+      force_flash: false,
+      flip_horiz: true,
+      fps: 45,
+    });
+
+    Webcam.attach(camera);
+
+    capture.addEventListener("click", () => {
+      Webcam.snap(function (data_uri) {
+        foto.value = data_uri;
+        result.innerHTML = `<i class="bi-check-circle-fill text-success"></i><p>Foto berhasil disimpan</p>`;
+        camera.remove();
+        capture.remove();
+
+        if (foto.value) {
+          tombol.innerHTML = `<input type="button" class="btn btn-secondary bg-gradient me-1" value="Reset" onclick="document.location.reload()" />
+          <input type="submit" class="btn btn-primary bg-gradient" value="Submit" />`;
+        }
+      });
+    });
+  </script>
+  <script>
+    const tidakAman = document.querySelector(".tidak-aman");
+    const aman = document.querySelector(".aman");
+
+    tidakAman.addEventListener("click", () => {
+      if (tidakAman.checked) {
+        tidakAman.nextElementSibling.nextElementSibling.innerHTML = '<input type="text" class="form-control mt-2 ket" id="formGroupExampleInput2" placeholder="Masukkan detail kondisi tidak aman" name="kondisi" />';
+      }
+    });
+
+    aman.addEventListener("click", () => {
+      if (aman.checked) {
+        tidakAman.nextElementSibling.nextElementSibling.innerHTML = "";
+      }
+    });
+  </script>
+</main>
+{% endblock content %}
