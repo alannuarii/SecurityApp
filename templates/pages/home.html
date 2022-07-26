@@ -8,7 +8,11 @@
       <h6 class="text-center mt-2">Buku Tamu</h6>
     </div>
     <div class="col-6 col-lg-4 mb-5 mb-lg-0">
+      {% if photos %}
       <a href="{% url 'form_patroli' %}" class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-arrow-repeat text-light"></i></a>
+      {% else %}
+      <div class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient" data-bs-toggle="modal" data-bs-target="#modal-patroli"><i class="bi-arrow-repeat text-light"></i></div>
+      {% endif %}
       <h6 class="text-center mt-2">Form Patroli</h6>
     </div>
     <div class="col-6 col-lg-4 mb-5 mb-lg-0">
@@ -28,6 +32,19 @@
       <h6 class="text-center mt-2">SOP</h6>
     </div>
   </div>
+  <!-- Awal Modal Patroli  -->
+  <div class="modal fade" id="modal-patroli" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center position-relative">
+          <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          <i class="bi-exclamation-triangle-fill text-warning"></i>
+          <h4>Maaf, Anda belum patroli</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Akhir Modal Patroli  -->
 </main>
 <nav class="navbar bot-navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark d-lg-none">
   <div class="container-fluid position-relative">

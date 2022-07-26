@@ -60,6 +60,9 @@ main {
 .home .card i {
   font-size: 80px;
 }
+.home .modal i {
+  font-size: 70px;
+}
 
 /* FORM INPUT ALL */
 .form-input .card {

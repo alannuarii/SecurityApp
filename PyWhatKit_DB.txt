@@ -1,0 +1,60 @@
+Date: 26/7/2022
+Time: 9:32
+Group ID: Testing Group
+Message: Hey All!
+--------------------
+Date: 26/7/2022
+Time: 9:38
+Group ID: Testing Group
+Message: Hey All!
+--------------------
+Date: 26/7/2022
+Time: 9:39
+Group ID: Testing Group
+Message: Hey All!
+--------------------
+Date: 26/7/2022
+Time: 9:46
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: Hey All!
+--------------------
+Date: 26/7/2022
+Time: 9:57
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: Laporan patroli lokasi Ruang Rapat
+--------------------
+Date: 26/7/2022
+Time: 10:4
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: Laporan Patroli Lokasi Area gedung kantor Security Patroli: 4
+--------------------
+Date: 26/7/2022
+Time: 10:13
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Lokasi: Area gedung kantor Security Patroli: Karter Tanduk Kondisi: Aman
+--------------------
+Date: 26/7/2022
+Time: 10:15
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Lokasi: Gerbang Security Patroli: Faisal Monopode Kondisi: Aman
+--------------------
+Date: 26/7/2022
+Time: 10:21
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Tanggal 26-07-2022 Pukul 10:20 WITA Lokasi: Area gedung kantor Security Patroli: Imran Mokodompit Kondisi: Ada maling bos
+--------------------
+Date: 26/7/2022
+Time: 10:28
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Tanggal 26-07-2022 Pukul 10:28 WITA Lokasi: Gerbang Security Patroli: Karter Tanduk Kondisi: Aman Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-26/11
+--------------------
+Date: 26/7/2022
+Time: 11:37
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Tanggal 26-07-2022 Pukul 11:37 WITA Lokasi: Ruang Rapat Security Patroli: Imran Mokodompit Kondisi: Aman Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-26/12
+--------------------
+Date: 26/7/2022
+Time: 15:15
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Tanggal 26-07-2022 Pukul 15:15 WITA Lokasi: Area gedung kantor Security Patroli: Michael Baranoy Kondisi: Ada maling bos Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-26/13
+--------------------

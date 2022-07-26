@@ -10,8 +10,13 @@ import pywhatkit as pw
 
 # HALAMAN HOME 
 def home(request):
+    today = datetime.now().strftime('%H')
+    report_foto = Foto.objects.filter(waktu=patroli(int(today))) 
 
-    context={'title':'Beranda'}
+    context={
+        'title':'Beranda',
+        'photos': report_foto,
+        }
     return render(request, 'pages/home.html', context)
 
 
@@ -54,6 +59,7 @@ def form_patroli(request):
 
         input = Patroli(detail_time=detail_time, lokasi=lokasi, kondisi=kondisi, nama_security_id_id=nama_security_id, shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Patroli',tengah=names[int(nama_security_id)-1].nama_security), waktu=waktu)
         input.save()
+        pw.sendwhatmsg_to_group_instantly("BoqTd9gtvEt9ioXc5RqWee", "LAPORAN PATROLI \n{} \nLokasi: {} \nSecurity Patroli: {} \nKondisi: {} \nDetail Laporan: \nhttp://127.0.0.1:8000/laporan-patroli-shift/{}/{}".format(detail_time.strftime('Tanggal %d-%m-%Y Pukul %H:%M WITA'), lokasi, names[int(nama_security_id) - 1].nama_security, kondisi, detail_time.strftime('%Y-%m-%d'), str(waktu)))
         return redirect('/')
 
     context={
@@ -66,10 +72,29 @@ def form_patroli(request):
 # LAPORAN PATROLI 
 def laporan_patroli(request):
     today = datetime.now().strftime('%Y-%m-%d')
+    ptrl_11 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=11)
+    ptrl_12 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=12)
+    ptrl_13 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=13)
+    ptrl_21 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=21)
+    ptrl_22 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=22)
+    ptrl_23 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=23)
+    ptrl_31 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=31)
+    ptrl_32 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=32)
+    ptrl_33 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=33)
 
+    # print(len(report_patroli))
     context={
         'title':'Laporan Patroli',
         'today': today,
+        'ptrl_11': ptrl_11,
+        'ptrl_12': ptrl_12,
+        'ptrl_13': ptrl_13,
+        'ptrl_21': ptrl_21,
+        'ptrl_22': ptrl_22,
+        'ptrl_23': ptrl_23,
+        'ptrl_31': ptrl_31,
+        'ptrl_32': ptrl_32,
+        'ptrl_33': ptrl_33,
         }
     return render(request, 'pages/laporan-patroli.html', context)
 
