@@ -10,12 +10,15 @@ import pywhatkit as pw
 
 # HALAMAN HOME 
 def home(request):
-    today = datetime.now().strftime('%H')
-    report_foto = Foto.objects.filter(waktu=patroli(int(today))) 
+    jam = datetime.now().strftime('%H')
+    tanggal = datetime.now().strftime('%Y-%m-%d')
+    report_foto = Foto.objects.filter(waktu=patroli(int(jam))) & Foto.objects.filter(tanggal=tanggal)
+    report_patroli = Patroli.objects.filter(waktu=patroli(int(jam))) & Patroli.objects.filter(tanggal=tanggal)
 
     context={
         'title':'Beranda',
         'photos': report_foto,
+        'patrolis': report_patroli,
         }
     return render(request, 'pages/home.html', context)
 

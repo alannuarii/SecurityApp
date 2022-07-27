@@ -2,16 +2,33 @@
 <title>{{title}}</title>
 {% endblock title %} {% block content %}
 <main class="container home d-lg-flex justify-content-lg-center align-items-lg-center">
+  <div class="row d-lg-none px-3 mb-2">
+    {% if patrolis %}
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Well done!</h4>
+      <hr />
+      <p>Patroli telah dilaksanakan oleh <strong>{{patrolis.0.nama_security_id.nama_security}}</strong> pada pukul {{patrolis.0.detail_time|time:"H:i"}} WITA</p>
+    </div>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+      <h4 class="alert-heading">Warning!</h4>
+      <hr />
+      <p>Patroli belum dilaksanakan, segera laksanakan!</p>
+    </div>
+    {% endif %}
+  </div>
   <div class="row g-lg-5">
     <div class="col-6 col-lg-4 mb-5 mb-lg-0">
       <a href="{% url 'form_tamu' %}" class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-book text-light"></i></a>
       <h6 class="text-center mt-2">Buku Tamu</h6>
     </div>
     <div class="col-6 col-lg-4 mb-5 mb-lg-0">
-      {% if photos %}
+      {% if photos and patrolis%}
+      <div class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient" data-bs-toggle="modal" data-bs-target="#modal-sudah"><i class="bi-arrow-repeat text-light"></i></div>
+      {% elif photos %}
       <a href="{% url 'form_patroli' %}" class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-arrow-repeat text-light"></i></a>
       {% else %}
-      <div class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient" data-bs-toggle="modal" data-bs-target="#modal-patroli"><i class="bi-arrow-repeat text-light"></i></div>
+      <div class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient" data-bs-toggle="modal" data-bs-target="#modal-belum"><i class="bi-arrow-repeat text-light"></i></div>
       {% endif %}
       <h6 class="text-center mt-2">Form Patroli</h6>
     </div>
@@ -32,8 +49,21 @@
       <h6 class="text-center mt-2">SOP</h6>
     </div>
   </div>
-  <!-- Awal Modal Patroli  -->
-  <div class="modal fade" id="modal-patroli" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- Awal Modal Selesai Patroli  -->
+  <div class="modal fade" id="modal-sudah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center position-relative">
+          <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          <i class="bi-check-circle-fill text-success"></i>
+          <h4>Patroli telah dilaksanakan</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Akhir Modal Selesai Patroli  -->
+  <!-- Awal Modal Belum Patroli  -->
+  <div class="modal fade" id="modal-belum" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body text-center position-relative">
@@ -44,7 +74,7 @@
       </div>
     </div>
   </div>
-  <!-- Akhir Modal Patroli  -->
+  <!-- Akhir Modal Belum Patroli  -->
 </main>
 <nav class="navbar bot-navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark d-lg-none">
   <div class="container-fluid position-relative">

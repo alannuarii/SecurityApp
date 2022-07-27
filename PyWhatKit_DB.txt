@@ -63,3 +63,18 @@ Time: 7:8
 Group ID: BoqTd9gtvEt9ioXc5RqWee
 Message: LAPORAN PATROLI Tanggal 27-07-2022 Pukul 07:08 WITA Lokasi: Gerbang Security Patroli: Jonly Tulandi Kondisi: Aman Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-27/33
 --------------------
+Date: 27/7/2022
+Time: 9:37
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Tanggal 27-07-2022 Pukul 09:37 WITA Lokasi: Ruang Rapat Security Patroli: Imran Mokodompit Kondisi: Aman Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-27/11
+--------------------
+Date: 27/7/2022
+Time: 10:9
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Tanggal 27-07-2022 Pukul 10:09 WITA Lokasi: Ruang Rapat Security Patroli: Imran Mokodompit Kondisi: Aman Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-27/11
+--------------------
+Date: 27/7/2022
+Time: 10:51
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Tanggal 27-07-2022 Pukul 10:51 WITA Lokasi: Area gedung kantor Security Patroli: Imran Mokodompit Kondisi: Aman Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-27/11
+--------------------
