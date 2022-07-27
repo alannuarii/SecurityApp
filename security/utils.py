@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.core.files.base import ContentFile
+from googletrans import Translator
 import base64
 
 def base64tojpg1(fotobase64, depan:str, tengah):
@@ -60,3 +61,24 @@ def patroli(jam):
         return 32
     elif jam in malam3:
         return 33
+
+
+def tanggal(input): #input berupa string tanggal 'yyyy-mm-dd'
+    def bulan(month):
+        if month == 'Berbaris':
+            month = 'Maret'
+            return month
+        elif month == 'Mungkin':
+            month = 'Mei'
+            return month
+        else:
+            return month
+
+    str_tanggal = datetime.strptime(input, '%Y-%m-%d')
+    str_hari = str_tanggal.strftime('%A')
+    str_bulan = str_tanggal.strftime('%B')
+    trans_hari = Translator().translate(str_hari, src='en', dest='id')
+    trans_bulan = Translator().translate(str_bulan, src='en', dest='id')
+    result = str_tanggal.strftime('{}, %d {} %Y'.format(trans_hari.text, bulan(trans_bulan.text)))
+    
+    return result

@@ -58,3 +58,8 @@ Time: 15:15
 Group ID: BoqTd9gtvEt9ioXc5RqWee
 Message: LAPORAN PATROLI Tanggal 26-07-2022 Pukul 15:15 WITA Lokasi: Area gedung kantor Security Patroli: Michael Baranoy Kondisi: Ada maling bos Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-26/13
 --------------------
+Date: 27/7/2022
+Time: 7:8
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Tanggal 27-07-2022 Pukul 07:08 WITA Lokasi: Gerbang Security Patroli: Jonly Tulandi Kondisi: Aman Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-27/33
+--------------------

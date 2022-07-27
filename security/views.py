@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from security.models import Security, Pegawai, Tamu, Foto, Patroli
-from security.control import *
+from security.utils import *
 from datetime import datetime
 from django.conf import settings
 import pywhatkit as pw
@@ -72,6 +72,13 @@ def form_patroli(request):
 # LAPORAN PATROLI 
 def laporan_patroli(request):
     today = datetime.now().strftime('%Y-%m-%d')
+    query = request.GET.get('tanggal') 
+    
+    if query:
+        query_trans = tanggal(query)
+    else:
+        query_trans = ''
+
     ptrl_11 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=11)
     ptrl_12 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=12)
     ptrl_13 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=13)
@@ -82,10 +89,25 @@ def laporan_patroli(request):
     ptrl_32 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=32)
     ptrl_33 = Patroli.objects.filter(tanggal=today) & Patroli.objects.filter(waktu=33)
 
-    # print(len(report_patroli))
+    if 'tanggal' in request.GET:
+        query_tgl = request.GET.get('tanggal')
+        ptrl_11 = Patroli.objects.filter(tanggal=query_tgl) & Patroli.objects.filter(waktu=11)
+        ptrl_12 = Patroli.objects.filter(tanggal=query_tgl) & Patroli.objects.filter(waktu=12)
+        ptrl_13 = Patroli.objects.filter(tanggal=query_tgl) & Patroli.objects.filter(waktu=13)
+        ptrl_21 = Patroli.objects.filter(tanggal=query_tgl) & Patroli.objects.filter(waktu=21)
+        ptrl_22 = Patroli.objects.filter(tanggal=query_tgl) & Patroli.objects.filter(waktu=22)
+        ptrl_23 = Patroli.objects.filter(tanggal=query_tgl) & Patroli.objects.filter(waktu=23)
+        ptrl_31 = Patroli.objects.filter(tanggal=query_tgl) & Patroli.objects.filter(waktu=31)
+        ptrl_32 = Patroli.objects.filter(tanggal=query_tgl) & Patroli.objects.filter(waktu=32)
+        ptrl_33 = Patroli.objects.filter(tanggal=query_tgl) & Patroli.objects.filter(waktu=33)
+
+    
     context={
         'title':'Laporan Patroli',
         'today': today,
+        'query': query or None,
+        'date_today': tanggal(today),
+        'date_query': query_trans,
         'ptrl_11': ptrl_11,
         'ptrl_12': ptrl_12,
         'ptrl_13': ptrl_13,

@@ -6,12 +6,23 @@
     <div class="col-lg-8 offset-lg-2">
       <h3 class="text-center border-bottom pb-2">LAPORAN PATROLI</h3>
       <label for="exampleFormControlInput1" class="form-label mt-3">Masukkan tanggal patroli</label>
-      <input type="date" class="form-control" />
-      <h5 class="text-center mt-4 fw-bolder">{{today}}</h5>
+      <form action="">
+        <input type="date" class="form-control" name="tanggal" onchange="this.form.submit()" />
+      </form>
+      {% if date_query %}
+      <h5 class="text-center mt-4 fw-bolder">{{date_query}}</h5>
+      {% else %}
+      <h5 class="text-center mt-4 fw-bolder">{{date_today}}</h5>
+      {% endif %}
+
       <div class="card mt-4">
         <h4 class="text-center p-3 mb-2 bg-primary bg-gradient text-white rounded-4">Shift Malam</h4>
         <div class="list-group w-auto">
+          {% if query %}
+          <a href="{% url 'laporan_patroli_shift' tanggal=query waktu=31 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
           <a href="{% url 'laporan_patroli_shift' tanggal=today waktu=31 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
             {% if ptrl_31.0.waktu == 31 %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
             {% else %}
@@ -21,7 +32,11 @@
               <h6 class="mb-0">Pukul 00:00 – 02:00 WITA</h6>
             </div>
           </a>
+          {% if query %}
+          <a href="{% url 'laporan_patroli_shift' tanggal=query waktu=32 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
           <a href="{% url 'laporan_patroli_shift' tanggal=today waktu=32 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
             {% if ptrl_32.0.waktu == 32 %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
             {% else %}
@@ -31,7 +46,11 @@
               <h6 class="mb-0">Pukul 03:00 – 05:00 WITA</h6>
             </div>
           </a>
+          {% if query %}
+          <a href="{% url 'laporan_patroli_shift' tanggal=query waktu=33 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
           <a href="{% url 'laporan_patroli_shift' tanggal=today waktu=33 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
             {% if ptrl_33.0.waktu == 33 %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
             {% else %}
@@ -46,7 +65,11 @@
       <div class="card mt-3">
         <h4 class="text-center p-3 mb-2 bg-primary bg-gradient text-white rounded-4">Shift Pagi</h4>
         <div class="list-group w-auto">
+          {% if query %}
+          <a href="{% url 'laporan_patroli_shift' tanggal=query waktu=11 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
           <a href="{% url 'laporan_patroli_shift' tanggal=today waktu=11 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
             {% if ptrl_11.0.waktu == 11 %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
             {% else %}
@@ -56,7 +79,11 @@
               <h6 class="mb-0">Pukul 08:00 – 10:00 WITA</h6>
             </div>
           </a>
+          {% if query %}
+          <a href="{% url 'laporan_patroli_shift' tanggal=query waktu=12 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
           <a href="{% url 'laporan_patroli_shift' tanggal=today waktu=12 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
             {% if ptrl_12.0.waktu == 12 %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
             {% else %}
@@ -66,7 +93,11 @@
               <h6 class="mb-0">Pukul 11:00 – 13:00 WITA</h6>
             </div>
           </a>
+          {% if query %}
+          <a href="{% url 'laporan_patroli_shift' tanggal=query waktu=13 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
           <a href="{% url 'laporan_patroli_shift' tanggal=today waktu=13 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
             {% if ptrl_13.0.waktu == 13 %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
             {% else %}
@@ -81,7 +112,11 @@
       <div class="card mt-4">
         <h4 class="text-center p-3 mb-2 bg-primary bg-gradient text-white rounded-4">Shift Sore</h4>
         <div class="list-group w-auto">
+          {% if query %}
+          <a href="{% url 'laporan_patroli_shift' tanggal=query waktu=21 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
           <a href="{% url 'laporan_patroli_shift' tanggal=today waktu=21 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
             {% if ptrl_21.0.waktu == 21 %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
             {% else %}
@@ -91,7 +126,11 @@
               <h6 class="mb-0">Pukul 16:00 – 18:00 WITA</h6>
             </div>
           </a>
+          {% if query %}
+          <a href="{% url 'laporan_patroli_shift' tanggal=query waktu=22 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
           <a href="{% url 'laporan_patroli_shift' tanggal=today waktu=22 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
             {% if ptrl_22.0.waktu == 22 %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
             {% else %}
@@ -101,7 +140,11 @@
               <h6 class="mb-0">Pukul 19:00 – 21:00 WITA</h6>
             </div>
           </a>
+          {% if query %}
+          <a href="{% url 'laporan_patroli_shift' tanggal=query waktu=23 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
           <a href="{% url 'laporan_patroli_shift' tanggal=today waktu=23 %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
             {% if ptrl_23.0.waktu == 23 %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
             {% else %}

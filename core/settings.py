@@ -142,3 +142,5 @@ BATON = {
     'SITE_TITLE' : 'Security App',
     'INDEX_TITLE' : 'Site Administration',
 }
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
