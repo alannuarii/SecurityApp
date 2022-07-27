@@ -20,7 +20,7 @@
   <div class="row g-lg-5">
     <div class="col-6 col-lg-4 mb-5 mb-lg-0">
       <a href="{% url 'form_tamu' %}" class="card btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-book text-light"></i></a>
-      <h6 class="text-center mt-2">Buku Tamu</h6>
+      <h6 class="text-center mt-2">Form Buku Tamu</h6>
     </div>
     <div class="col-6 col-lg-4 mb-5 mb-lg-0">
       {% if photos and patrolis%}
@@ -78,7 +78,7 @@
 </main>
 <nav class="navbar bot-navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark d-lg-none">
   <div class="container-fluid position-relative">
-    <a href="{% url 'camera_action' %}" class="btn btn-primary bg-gradient rounded-circle position-absolute top-0 start-50 translate-middle"><i class="bi-camera"></i></a>
+    <a href="{% url 'camera_action' %}" id="camera" class="btn btn-primary bg-gradient rounded-circle position-absolute top-0 start-50 translate-middle"><i class="bi-camera"></i></a>
   </div>
 </nav>
 {% endblock content %}
