@@ -1,5 +1,5 @@
 from django.contrib import admin
-from security.models import Security, Pegawai, Tamu, Foto, Patroli
+from security.models import Security, Pegawai, Tamu, Foto, Patroli, Apel, CCTV
 
 # Register your models here.
 class SecurityAdmin(admin.ModelAdmin):
@@ -17,9 +17,17 @@ class FotoAdmin(admin.ModelAdmin):
 class PatroliAdmin(admin.ModelAdmin):
     list_display = ('id','tanggal','detail_time','nama_security_id','shift','waktu','lokasi','kondisi','foto')
 
+class ApelAdmin(admin.ModelAdmin):
+    list_display = ('id','tanggal','detail_time','nama_security_id','shift','atribut','foto')
+
+class CCTVAdmin(admin.ModelAdmin):
+    list_display = ('id','tanggal','detail_time','nama_security_id','shift','lokasi','kondisi')
+
 
 admin.site.register(Security, SecurityAdmin)
 admin.site.register(Pegawai, PegawaiAdmin)
 admin.site.register(Tamu, TamuAdmin)
 admin.site.register(Foto, FotoAdmin)
 admin.site.register(Patroli, PatroliAdmin)
+admin.site.register(Apel, ApelAdmin)
+admin.site.register(CCTV, CCTVAdmin)

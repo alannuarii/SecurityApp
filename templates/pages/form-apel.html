@@ -6,34 +6,37 @@
     <div class="col-lg-8 offset-lg-2">
       <h3 class="text-center border-bottom pb-2">FORM INPUT APEL</h3>
       <div class="card mt-4">
-        <div class="mb-3">
-          <label for="formGroupExampleInput" class="form-label">Nama Security</label>
-          {% for name in names %}
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="{{name.id}}" id="flexCheckDefault" />
-            <label class="form-check-label" for="flexCheckDefault"> {{name.nama_security}} </label>
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Nama Security</label>
+            {% for name in names %}
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="nama_security_id" value="{{name.id}}" id="flexCheckDefault" />
+              <label class="form-check-label" for="flexCheckDefault"> {{name.nama_security}} </label>
+            </div>
+            {% endfor %}
           </div>
-          {% endfor %}
-        </div>
-        <div class="mb-3">
-          <label for="formGroupExampleInput2" class="form-label">Kelengkapan Atribut</label>
-          <div class="form-check">
-            <input class="form-check-input lengkap" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-            <label class="form-check-label" for="flexRadioDefault1"> Lengkap </label>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Kelengkapan Atribut</label>
+            <div class="form-check">
+              <input class="form-check-input lengkap" type="radio" name="atribut" id="flexRadioDefault1" value="Lengkap" />
+              <label class="form-check-label" for="flexRadioDefault1"> Lengkap </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input tidak-lengkap" type="radio" name="atribut" id="flexRadioDefault2" value="" />
+              <label class="form-check-label" for="flexRadioDefault2"> Tidak Lengkap </label>
+              <div></div>
+            </div>
           </div>
-          <div class="form-check">
-            <input class="form-check-input tidak-lengkap" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-            <label class="form-check-label" for="flexRadioDefault2"> Tidak Lengkap </label>
-            <div></div>
+          <div class="mb-3 d-flex flex-column align-items-center mx-auto foto-tamu border rounded-2 p-4 w-100">
+            <div id="result" class="text-center"></div>
+            <div id="my_camera"></div>
+            <div class="btn btn-danger bg-gradient capture rounded-pill mt-1"><i class="bi-camera"></i></div>
+            <input type="hidden" name="foto" class="foto" value="" required />
           </div>
-        </div>
-        <div class="mb-3 d-flex flex-column align-items-center mx-auto foto-tamu border rounded-2 p-4 w-100">
-          <div id="result" class="text-center"></div>
-          <div id="my_camera"></div>
-          <div class="btn btn-danger bg-gradient capture rounded-pill mt-1"><i class="bi-camera"></i></div>
-          <input type="hidden" name="foto" class="foto" value="" required />
-        </div>
-        <div class="text-center tombol-tamu"></div>
+          <div class="text-center tombol-tamu"></div>
+        </form>
       </div>
     </div>
   </div>
@@ -72,6 +75,22 @@
           <input type="submit" class="btn btn-primary bg-gradient" value="Submit" />`;
         }
       });
+    });
+  </script>
+  <script>
+    const tidakLengkap = document.querySelector(".tidak-lengkap");
+    const lengkap = document.querySelector(".lengkap");
+
+    tidakLengkap.addEventListener("click", () => {
+      if (tidakLengkap.checked) {
+        tidakLengkap.nextElementSibling.nextElementSibling.innerHTML = '<input type="text" class="form-control mt-2 ket" id="formGroupExampleInput2" placeholder="Masukkan catatan atribut tidak lengkap" name="atribut" />';
+      }
+    });
+
+    lengkap.addEventListener("click", () => {
+      if (lengkap.checked) {
+        tidakLengkap.nextElementSibling.nextElementSibling.innerHTML = "";
+      }
     });
   </script>
 </main>

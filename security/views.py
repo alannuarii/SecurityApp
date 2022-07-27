@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from security.models import Security, Pegawai, Tamu, Foto, Patroli
+from security.models import Security, Pegawai, Tamu, Foto, Patroli, Apel, CCTV
 from security.utils import *
 from datetime import datetime
 from django.conf import settings
@@ -142,6 +142,19 @@ def laporan_patroli_shift(request, tanggal, waktu):
 def form_apel(request):
     names = Security.objects.all()
 
+    if request.method == 'POST':
+        nama_security = request.POST.getlist('nama_security_id')
+        for i in range(len(nama_security)):
+            detail_time = datetime.now()
+            atribut = request.POST['atribut']
+            foto = request.POST['foto']
+            nama_security_id = nama_security[i]
+            waktu_jaga = shift(int(detail_time.strftime('%H')))
+
+            input = Apel(detail_time=detail_time, atribut=atribut, nama_security_id_id=nama_security_id, shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Apel',tengah=names[int(nama_security_id)-1].nama_security))
+            input.save()
+        return redirect('/')
+
     context={
         'title':'Form Apel',
         'names': names
@@ -152,6 +165,19 @@ def form_apel(request):
 # HALAMAN FORM CCTV
 def form_cctv(request):
     names = Security.objects.all()
+
+    if request.method == 'POST':
+        nama_security = request.POST.getlist('nama_security_id')
+        for i in range(len(nama_security)):
+            detail_time = datetime.now()
+            kondisi = request.POST['kondisi']
+            lokasi = request.POST['lokasi']
+            nama_security_id = nama_security[i]
+            waktu_jaga = shift(int(detail_time.strftime('%H')))
+
+            input = CCTV(detail_time=detail_time, kondisi=kondisi, lokasi=lokasi, nama_security_id_id=nama_security_id, shift=waktu_jaga)
+            input.save()
+        return redirect('/')
 
     context={
         'title':'Form Apel',
