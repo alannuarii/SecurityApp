@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from security.models import Security, Pegawai, Tamu, Foto, Patroli, Apel, CCTV
+from security.models import Security, Pegawai, Tamu, Foto, Patroli, Apel, CCTV, Jadwal
 from security.utils import *
 from datetime import datetime
 from django.conf import settings
