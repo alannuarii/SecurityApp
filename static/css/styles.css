@@ -147,6 +147,9 @@ main {
 .form-input .capture i {
   font-size: 20px;
 }
+.form-input .card-jadwal {
+  padding: 100px 70px;
+}
 
 /* EMERGENCY CALL*/
 .emergency-call .card .card-header {
@@ -198,7 +201,7 @@ main {
   .navbar-collapse button {
     display: none;
   }
-  .navbar .admin {
+  .navbar .btn-offcanvas {
     display: none;
   }
 

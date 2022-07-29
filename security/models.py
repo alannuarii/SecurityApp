@@ -75,6 +75,7 @@ class Apel(models.Model):
         return '<Shift {} : {}>'.format(self.shift, self.tanggal)
 
 
+# Model CCTV 
 class CCTV(models.Model):
     tanggal = models.DateField(verbose_name='Tanggal', auto_now=True)
     detail_time = models.DateTimeField(verbose_name='Timestamp')
@@ -87,11 +88,12 @@ class CCTV(models.Model):
         return '<Shift {} : {}>'.format(self.shift, self.tanggal)
 
 
+# Model Jadwal Secuirty 
 class Jadwal(models.Model):
     tanggal = models.DateField(verbose_name='Tanggal')
     shift = models.CharField(verbose_name='Shift', max_length=10)
-    security1 = models.CharField(verbose_name='Security 1', max_length=30)
-    security2 = models.CharField(verbose_name='Security 1', max_length=30)
+    security1 = models.CharField(verbose_name='Security 1', max_length=30, blank=True, null=True)
+    security2 = models.CharField(verbose_name='Security 2', max_length=30, blank=True, null=True)
 
     def __str__(self):
         return '<Shift {} : {}>'.format(self.shift, self.tanggal)

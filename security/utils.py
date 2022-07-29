@@ -1,7 +1,9 @@
 from datetime import datetime
 from django.core.files.base import ContentFile
+from security.models import Jadwal
 from googletrans import Translator
 import base64
+
 
 def base64tojpg1(fotobase64, depan:str, tengah):
     new_foto = fotobase64.replace('data:image/jpeg;base64,','')
@@ -11,6 +13,7 @@ def base64tojpg1(fotobase64, depan:str, tengah):
     filefoto = ContentFile(image_data, filename)
     return filefoto
 
+
 def base64tojpg2(fotobase64):
     new_foto = fotobase64.replace('data:image/png;base64,','')
     image_data = base64.b64decode(new_foto)
@@ -18,6 +21,7 @@ def base64tojpg2(fotobase64):
     filename = nama+'.jpg'
     filefoto = ContentFile(image_data, filename)
     return filefoto
+
 
 def shift(jam):
     pagi = list(range(8,16))
@@ -82,3 +86,11 @@ def tanggal(input): #input berupa string tanggal 'yyyy-mm-dd'
     result = str_tanggal.strftime('{}, %d {} %Y'.format(trans_hari.text, bulan(trans_bulan.text)))
     
     return result
+
+
+def jadwal_shift():
+    today = datetime.now()
+    tanggal_today = today.strftime('%Y-%m-%d')
+    waktu = shift(int(today.strftime('%H')))
+    jadwal_security = Jadwal.objects.filter(tanggal=tanggal_today) & Jadwal.objects.filter(shift=waktu)
+    return jadwal_security

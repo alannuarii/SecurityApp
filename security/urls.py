@@ -13,6 +13,7 @@ urlpatterns = [
     path('laporan-patroli-shift/<str:tanggal>/<int:waktu>', views.laporan_patroli_shift, name='laporan_patroli_shift'),
     path('form-apel', views.form_apel, name='form_apel'),
     path('form-cctv', views.form_cctv, name='form_cctv'),
+    path('form-jadwal', views.form_jadwal, name='form_jadwal'),
     path('emergency-call', views.emergency_call, name='emergency_call'),
     path('sop', views.sop, name='sop'),
     path('camera-action', views.camera_action, name='camera_action'),

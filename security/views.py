@@ -3,6 +3,7 @@ from security.models import Security, Pegawai, Tamu, Foto, Patroli, Apel, CCTV, 
 from security.utils import *
 from datetime import datetime
 from django.conf import settings
+from tablib import Dataset
 import pywhatkit as pw
 
 
@@ -19,6 +20,7 @@ def home(request):
         'title':'Beranda',
         'photos': report_foto,
         'patrolis': report_patroli,
+        'jadwal': jadwal_shift(),
         }
     return render(request, 'pages/home.html', context)
 
@@ -42,6 +44,7 @@ def form_tamu(request):
         
     context={
         'title':'Form Penerimaan Tamu',
+        'jadwal': jadwal_shift(),
         'employees': employees
     }
     return render(request, 'pages/form-penerimaan-tamu.html', context)
@@ -67,6 +70,7 @@ def form_patroli(request):
 
     context={
         'title':'Form Patroli',
+        'jadwal': jadwal_shift(),
         'names': names
     }
     return render(request, 'pages/form-patroli.html', context)
@@ -107,6 +111,7 @@ def laporan_patroli(request):
     
     context={
         'title':'Laporan Patroli',
+        'jadwal': jadwal_shift(),
         'today': today,
         'query': query or None,
         'date_today': tanggal(today),
@@ -157,6 +162,7 @@ def form_apel(request):
 
     context={
         'title':'Form Apel',
+        'jadwal': jadwal_shift(),
         'names': names
     }
     return render(request, 'pages/form-apel.html', context)
@@ -180,21 +186,47 @@ def form_cctv(request):
         return redirect('/')
 
     context={
-        'title':'Form Apel',
+        'title':'Form CCTV',
+        'jadwal': jadwal_shift(),
         'names': names
     }
     return render(request, 'pages/form-cctv.html', context)
 
 
+# HALAMAN INPUT JADWAL SECURITY
+def form_jadwal(request):
+    
+    if request.method == 'POST':
+        dataset = Dataset()
+        jadwal = request.FILES['jadwal']
+
+        if not jadwal.name.endswith('xlsx'):
+            return redirect('/form_jadwal')
+        
+        imported = dataset.load(jadwal.read(), format='xlsx')
+        for data in imported:
+            input = Jadwal(data[0], data[1], data[2], data[3], data[4])
+            input.save()
+
+    context={'title':'Form Jadwal Security'}
+    return render(request, 'pages/form-jadwal.html', context)
+
+
 # HALAMAN EMERGENCY CALL
 def emergency_call(request):
-    context={'title':'Emergency Call'}
+    context={
+        'title':'Emergency Call', 
+        'jadwal': jadwal_shift(),
+    }
     return render(request, 'pages/emergency-call.html', context)
 
 
 # HALAMAN SOP
 def sop(request):
-    context={'title':'S O P'}
+    context={
+        'title':'S O P',
+        'jadwal': jadwal_shift(),
+        }
     return render(request, 'pages/sop.html', context)
 
 
@@ -207,7 +239,10 @@ def camera_action(request):
         input = Foto(foto=base64tojpg2(fotobase64=foto), detail_time=detail_time, waktu=waktu)
         input.save()
 
-    context={'title':'Camera Action'}
+    context={
+        'title':'Camera Action',
+        'jadwal': jadwal_shift(),
+        }
     return render(request, 'pages/camera-action.html', context)
 
 

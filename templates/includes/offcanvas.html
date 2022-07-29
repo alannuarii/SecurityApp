@@ -1,0 +1,28 @@
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="py-3 border-bottom dropdown">
+        <a href="#collapse1" class="text-decoration-none text-light" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">Jadwal Security <i class="bi-caret-down-fill align-middle"></i></a>
+        <div class="collapse" id="collapse1">
+          <div class="list-group mt-2">
+            <a href="{% url 'form_jadwal' %}" class="list-group-item list-group-item-action">Input Jadwal</a>
+            <a href="#" class="list-group-item list-group-item-action">Jadwal Security</a>
+          </div>
+        </div>
+      </li>
+      <li class="py-3 border-bottom dropdown">
+        <a href="#collapse2" class="text-decoration-none text-light" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample"> Link with href </a>
+        <div class="collapse" id="collapse2">
+          <div class="list-group mt-2">
+            <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+            <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

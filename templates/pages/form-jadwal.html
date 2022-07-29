@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container form-input">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <h3 class="text-center border-bottom pb-2">FORM INPUT JADWAL SECURITY</h3>
+      <div class="card mt-4 card-jadwal">
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <div>
+              <label for="formFileLg" class="form-label">Masukkan file jadwal security dengan format .xlsx</label>
+              <input class="form-control form-control-lg" id="formFileLg" type="file" name="jadwal" />
+            </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <input type="button" value="Reset" class="btn btn-secondary bg-gradient me-1" id="sig-clearBtn" />
+            <button id="sig-submitBtn" type="submit" class="btn btn-primary bg-gradient">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}
