@@ -7,26 +7,29 @@
       <div class="d-flex justify-content-center">
         <video autoplay height="480" width="360" id="video"></video>
       </div>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center" id="btn-video">
         <button class="btn btn-secondary bg-gradient rounded-circle" id="btnPlay">
           <i class="bi-play"></i>
         </button>
         <button class="btn btn-secondary bg-gradient rounded-circle" id="btnPause">
           <i class="bi-pause"></i>
         </button>
-        <form action="" method="post" class="d-inline mx-2">
-          {% csrf_token %}
-          <input type="hidden" name="foto" class="foto" value="" required />
-          <button class="btn btn-danger bg-gradient rounded-circle" id="btnScreenshot" onchange="this.form.submit()">
-            <i class="bi-camera"></i>
-          </button>
-        </form>
+        <button class="btn btn-danger bg-gradient rounded-circle mx-2" id="btnScreenshot">
+          <i class="bi-camera"></i>
+        </button>
         <button class="btn btn-secondary bg-gradient rounded-circle" id="btnChangeCamera">
           <i class="bi-arrow-repeat"></i>
         </button>
       </div>
+      <form action="" method="post" class="border rounded-2 p-4 w-100">
+        {% csrf_token %}
+        <div id="result" class="text-center"></div>
+        <input type="hidden" name="foto" class="foto" value="" required />
+        <div class="text-center tombol-input"></div>
+      </form>
     </div>
   </div>
+
   <div class="row">
     <div class="col">
       <div id="screenshots"></div>
@@ -49,6 +52,9 @@
       const canvas = document.querySelector("#canvas");
       const devicesSelect = document.querySelector("#devicesSelect");
       const foto = document.querySelector(".foto");
+      const btnVideo = document.querySelector("#btn-video");
+      const result = document.getElementById("result");
+      const tombol = document.querySelector(".tombol-input");
 
       // video constraints
       const constraints = {
@@ -95,6 +101,14 @@
         canvas.getContext("2d").drawImage(video, 0, 0);
         img.src = canvas.toDataURL("image/png");
         foto.value = img.src;
+        result.innerHTML = `<i class="bi-check-circle-fill text-success"></i><p>Foto berhasil disimpan</p>`;
+        btnVideo.remove();
+        video.remove();
+
+        if (foto.value) {
+          tombol.innerHTML = `<input type="button" class="btn btn-secondary bg-gradient me-1" value="Reset" onclick="document.location.reload()" />
+          <input type="submit" class="btn btn-primary bg-gradient" value="Submit" />`;
+        }
       });
 
       // switch camera

@@ -163,6 +163,9 @@ main {
 .camera-action i {
   font-size: 30px;
 }
+.camera-action #result .bi-check-circle-fill {
+  font-size: 70px;
+}
 
 /* LAPORAN PATROLI */
 .laporan-patroli .card {

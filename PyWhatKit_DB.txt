@@ -123,3 +123,8 @@ Time: 23:51
 Group ID: BoqTd9gtvEt9ioXc5RqWee
 Message: LAPORAN PATROLI Tanggal 27-07-2022 Pukul 23:51 WITA Lokasi: Gerbang Security Patroli: Jerry Legoh Kondisi: Aman Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-27/23
 --------------------
+Date: 29/7/2022
+Time: 11:15
+Group ID: BoqTd9gtvEt9ioXc5RqWee
+Message: LAPORAN PATROLI Tanggal 29-07-2022 Pukul 11:15 WITA Lokasi: Ruang Rapat Security Patroli: Imran Mokodompit Kondisi: Aman Detail Laporan: http://127.0.0.1:8000/laporan-patroli-shift/2022-07-29/12
+--------------------
