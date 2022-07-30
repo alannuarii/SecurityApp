@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %} {% load static %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container jadwal-security">
+  <div class="row">
+    <h3 class="text-center border-bottom pb-2">JADWAL SECURITY</h3>
+    <div class="col overflow-auto mt-4">
+      <img src="{% static jadwal_security.foto %}" class="d-lg-none" alt="" />
+      <img src="{% static jadwal_security.foto %}" class="img-fluid jadwal" alt="" />
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col col-lg-3">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th colspan="2">Keterangan:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">M (Malam)</th>
+            <td>: 00:00 - 08:00 WITA</td>
+          </tr>
+          <tr>
+            <th scope="row">P (Pagi)</th>
+            <td>: 08:00 - 16:00 WITA</td>
+          </tr>
+          <tr>
+            <th scope="row">S (Sore)</th>
+            <td>: 16:00 - 24:00 WITA</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+{% endblock content %}

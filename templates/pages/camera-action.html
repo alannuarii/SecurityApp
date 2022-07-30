@@ -21,7 +21,7 @@
           <i class="bi-arrow-repeat"></i>
         </button>
       </div>
-      <form action="" method="post" class="border rounded-2 p-4 w-100">
+      <form action="" method="post" class="border rounded-2 p-4 w-100 camera-form">
         {% csrf_token %}
         <div id="result" class="text-center"></div>
         <input type="hidden" name="foto" class="foto" value="" required />
@@ -55,6 +55,7 @@
       const btnVideo = document.querySelector("#btn-video");
       const result = document.getElementById("result");
       const tombol = document.querySelector(".tombol-input");
+      const form = document.querySelector(".camera-form");
 
       // video constraints
       const constraints = {
@@ -101,6 +102,7 @@
         canvas.getContext("2d").drawImage(video, 0, 0);
         img.src = canvas.toDataURL("image/png");
         foto.value = img.src;
+        form.style.display = "block";
         result.innerHTML = `<i class="bi-check-circle-fill text-success"></i><p>Foto berhasil disimpan</p>`;
         btnVideo.remove();
         video.remove();

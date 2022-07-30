@@ -248,8 +248,18 @@ main {
     padding: 20px;
   }
 
-  /* LPOARN PATROLI SHIFT  */
+  /* LAPORAN PATROLI SHIFT  */
   .laporan-patroli-shift .card-1 {
     padding: 20px;
+  }
+
+  /* CAMERA ACTION  */
+  .camera-action .camera-form {
+    display: none;
+  }
+
+  /* JADWAL SECURITY  */
+  .jadwal-security .jadwal {
+    display: none;
   }
 }

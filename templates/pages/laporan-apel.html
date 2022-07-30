@@ -1,0 +1,92 @@
+{% extends 'layouts/base.html' %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container laporan-patroli">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <h3 class="text-center border-bottom pb-2">LAPORAN APEL</h3>
+      <label for="exampleFormControlInput1" class="form-label mt-3">Masukkan tanggal apel</label>
+      <form action="">
+        <input type="date" class="form-control" name="tanggal" onchange="this.form.submit()" />
+      </form>
+      {% if date_query %}
+      <h5 class="text-center mt-4 fw-bolder">{{date_query}}</h5>
+      {% else %}
+      <h5 class="text-center mt-4 fw-bolder">{{date_today}}</h5>
+      {% endif %}
+
+      <div class="card mt-4">
+        <div class="list-group w-auto">
+          {% if query %}
+          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
+          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
+            {% if shift_malam.0.shift == 'Malam' %}
+            <i class="bi-check-circle-fill text-success bg-gradient"></i>
+            {% else %}
+            <i class="bi-exclamation-circle-fill text-secondary bg-gradient"></i>
+            {% endif %}
+            <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+              <h6 class="mb-0">Shift Malam</h6>
+            </div>
+          </a>
+          {% if query %}
+          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
+          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
+            {% if shift_pagi.0.shift == 'Pagi' %}
+            <i class="bi-check-circle-fill text-success bg-gradient"></i>
+            {% else %}
+            <i class="bi-exclamation-circle-fill text-secondary bg-gradient"></i>
+            {% endif %}
+            <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+              <h6 class="mb-0">Shift Pagi</h6>
+            </div>
+          </a>
+          {% if query %}
+          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% else %}
+          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          {% endif %}
+            {% if shift_sore.0.shift == 'Sore' %}
+            <i class="bi-check-circle-fill text-success bg-gradient"></i>
+            {% else %}
+            <i class="bi-exclamation-circle-fill text-secondary bg-gradient"></i>
+            {% endif %}
+            <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+              <h6 class="mb-0">Shift Sore</h6>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col col-lg-4">
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th colspan="2">Keterangan:</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Shift Malam</th>
+                <td>: 00:00 - 08:00 WITA</td>
+              </tr>
+              <tr>
+                <th scope="row">Shift Pagi</th>
+                <td>: 08:00 - 16:00 WITA</td>
+              </tr>
+              <tr>
+                <th scope="row">Shift Sore</th>
+                <td>: 16:00 - 24:00 WITA</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}

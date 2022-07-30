@@ -10,22 +10,17 @@
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <h5 class="text-center text-bg-primary py-2 mt-2 fw-light rounded-4 d-lg-none">Petugas saat ini:</h5>
       <div class="shift d-flex justify-content-evenly mb-3 d-lg-none">
-        {% if jadwal.0.security1 %}
+        {% for jdwl in jadwal %}
         <div class="text-center">
           <i class="bi-person-fill text-light"></i>
-          <h6 class="text-light fw-light">{{jadwal.0.security1}}</h6>
+          <h6 class="text-light fw-light">{{jdwl.nama_security_id.nama_security}}</h6>
         </div>
-        {% endif %} {% if jadwal.0.security2 %}
-        <div class="text-center">
-          <i class="bi-person-fill text-light"></i>
-          <h6 class="text-light fw-light">{{jadwal.0.security2}}</h6>
-        </div>
-        {% endif %}
+        {% endfor %}
       </div>
       <!-- <hr class="text-light" /> -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-lg-none">
         <li class="nav-item py-2 border-bottom">
-          <a class="nav-link" href="#">Jadwal Security</a>
+          <a class="nav-link" href="{% url 'jadwal_security' %}">Jadwal Security</a>
         </li>
         <li class="nav-item py-2 border-bottom">
           <a class="nav-link" href="#">Summary Report</a>
@@ -43,7 +38,7 @@
         <li class="nav-item py-2 border-bottom dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Apel</a>
           <ul class="dropdown-menu" aria-labelledby="dropdown01">
-            <li><a class="dropdown-item py-2" href="">Daily Report</a></li>
+            <li><a class="dropdown-item py-2" href="{% url 'laporan_apel' %}">Daily Report</a></li>
             <li><a class="dropdown-item py-2" href="#">Monthly Report</a></li>
           </ul>
         </li>

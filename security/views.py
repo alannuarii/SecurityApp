@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from security.models import Security, Pegawai, Tamu, Foto, Patroli, Apel, CCTV, Jadwal
+from security.models import Security, Pegawai, Tamu, Foto, Patroli, Apel, CCTV, Schedule
 from security.utils import *
 from datetime import datetime
 from django.conf import settings
@@ -168,6 +168,40 @@ def form_apel(request):
     return render(request, 'pages/form-apel.html', context)
 
 
+# LAPORAN APEL
+def laporan_apel(request):
+    today = datetime.now().strftime('%Y-%m-%d')
+    query = request.GET.get('tanggal') 
+    
+    if query:
+        query_trans = tanggal(query)
+    else:
+        query_trans = ''
+
+    shift_malam = Apel.objects.filter(tanggal=today) & Apel.objects.filter(shift='Malam')
+    shift_pagi = Apel.objects.filter(tanggal=today) & Apel.objects.filter(shift='Pagi')
+    shift_sore = Apel.objects.filter(tanggal=today) & Apel.objects.filter(shift='Sore')
+    
+    if 'tanggal' in request.GET:
+        query_tgl = request.GET.get('tanggal')
+        shift_malam = Apel.objects.filter(tanggal=query_tgl) & Apel.objects.filter(shift='Malam')
+        shift_pagi = Apel.objects.filter(tanggal=query_tgl) & Apel.objects.filter(shift='Pagi')
+        shift_sore = Apel.objects.filter(tanggal=query_tgl) & Apel.objects.filter(shift='Sore')
+        
+    context={
+        'title':'Laporan Apel',
+        'jadwal': jadwal_shift(),
+        'today': today,
+        'query': query or None,
+        'date_today': tanggal(today),
+        'date_query': query_trans,
+        'shift_malam': shift_malam,
+        'shift_pagi': shift_pagi,
+        'shift_sore': shift_sore,
+        }
+    return render(request, 'pages/laporan-apel.html', context)
+
+
 # HALAMAN FORM CCTV
 def form_cctv(request):
     names = Security.objects.all()
@@ -197,19 +231,27 @@ def form_cctv(request):
 def form_jadwal(request):
     
     if request.method == 'POST':
-        dataset = Dataset()
-        jadwal = request.FILES['jadwal']
-
-        if not jadwal.name.endswith('xlsx'):
-            return redirect('/form_jadwal')
-        
-        imported = dataset.load(jadwal.read(), format='xlsx')
-        for data in imported:
-            input = Jadwal(data[0], data[1], data[2], data[3], data[4])
-            input.save()
+        foto = request.FILES['foto']
+        periode = request.POST['periode']+'-01'
+        input = Schedule(foto=foto, periode=periode)
+        input.save()
+        return redirect('/')
 
     context={'title':'Form Jadwal Security'}
     return render(request, 'pages/form-jadwal.html', context)
+
+
+# HALAMAN JADWAL SECURITY
+def jadwal_security(request):
+    jadwal_security = Schedule.objects.last()
+    print(jadwal_security)
+
+    context={
+        'title':'Jadwal Security',
+        'jadwal': jadwal_shift(),
+        'jadwal_security': jadwal_security,
+        }
+    return render(request, 'pages/jadwal-security.html', context)
 
 
 # HALAMAN EMERGENCY CALL

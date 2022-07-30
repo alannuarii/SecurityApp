@@ -89,11 +89,9 @@ class CCTV(models.Model):
 
 
 # Model Jadwal Secuirty 
-class Jadwal(models.Model):
-    tanggal = models.DateField(verbose_name='Tanggal')
-    shift = models.CharField(verbose_name='Shift', max_length=10)
-    security1 = models.CharField(verbose_name='Security 1', max_length=30, blank=True, null=True)
-    security2 = models.CharField(verbose_name='Security 2', max_length=30, blank=True, null=True)
+class Schedule(models.Model):
+    foto = models.ImageField(verbose_name='Jadwal Security', upload_to='static/upload/jadwal')
+    periode = models.DateField(verbose_name='Periode')
 
     def __str__(self):
-        return '<Shift {} : {}>'.format(self.shift, self.tanggal)
+        return '<{}>'.format(self.periode)

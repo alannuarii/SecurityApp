@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.core.files.base import ContentFile
-from security.models import Jadwal
+from security.models import Apel
 from googletrans import Translator
 import base64
 
@@ -92,5 +92,5 @@ def jadwal_shift():
     today = datetime.now()
     tanggal_today = today.strftime('%Y-%m-%d')
     waktu = shift(int(today.strftime('%H')))
-    jadwal_security = Jadwal.objects.filter(tanggal=tanggal_today) & Jadwal.objects.filter(shift=waktu)
+    jadwal_security = Apel.objects.filter(tanggal=tanggal_today) & Apel.objects.filter(shift=waktu)
     return jadwal_security
