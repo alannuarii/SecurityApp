@@ -79,10 +79,11 @@ class Apel(models.Model):
 class CCTV(models.Model):
     tanggal = models.DateField(verbose_name='Tanggal', auto_now=True)
     detail_time = models.DateTimeField(verbose_name='Timestamp')
+    nama_security = models.CharField(verbose_name='Nama Secuirty', max_length=100)
     shift = models.CharField(verbose_name='Shift', max_length=10)
     kondisi = models.CharField(verbose_name='Kondisi', max_length=200)
     lokasi = models.CharField(verbose_name='Lokasi', max_length=100)
-    nama_security_id = models.ForeignKey(Security, on_delete=models.CASCADE, verbose_name='Nama Security')
+    
 
     def __str__(self):
         return '<Shift {} : {}>'.format(self.shift, self.tanggal)

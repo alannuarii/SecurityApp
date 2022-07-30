@@ -1,0 +1,80 @@
+{% extends 'layouts/base.html' %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container laporan-patroli">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <h3 class="text-center border-bottom pb-2">LAPORAN CCTV</h3>
+      <label for="exampleFormControlInput1" class="form-label mt-3">Masukkan tanggal patroli</label>
+      <form action="">
+        <input type="date" class="form-control" name="tanggal" onchange="this.form.submit()" />
+      </form>
+      {% if date_query %}
+      <h5 class="text-center mt-4 fw-bolder">{{date_query}}</h5>
+      {% else %}
+      <h5 class="text-center mt-4 fw-bolder">{{date_today}}</h5>
+      {% endif %}
+      <div class="card mt-4">
+        <h4 class="text-center p-3 mb-2 bg-primary bg-gradient text-white rounded-4">Shift Malam</h4>
+        <div class="list-group w-auto">
+          {% if shift_malam %} {% for malam in shift_malam %}
+          <div class="list-group-item d-flex gap-3 py-3">
+            <i class="bi-eye-fill text-success bg-gradient"></i>
+            <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+              <h6 class="mb-0">Pantauan Pukul {{malam.detail_time|time:"H:i"}} WITA</h6>
+            </div>
+          </div>
+          {% endfor %} {% else %}
+          <div class="list-group-item d-flex gap-3 py-3">
+            <i class="bi-eye-slash-fill text-secondary bg-gradient"></i>
+            <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+              <h6 class="mb-0">Belum ada data pantauan</h6>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="card mt-4">
+        <h4 class="text-center p-3 mb-2 bg-primary bg-gradient text-white rounded-4">Shift Pagi</h4>
+        <div class="list-group w-auto">
+          {% if shift_pagi %} {% for pagi in shift_pagi %}
+          <div class="list-group-item d-flex gap-3 py-3">
+            <i class="bi-eye-fill text-success bg-gradient"></i>
+            <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+              <h6 class="mb-0">Pantauan Pukul {{pagi.detail_time|time:"H:i"}} WITA</h6>
+            </div>
+          </div>
+          {% endfor %} {% else %}
+          <div class="list-group-item d-flex gap-3 py-3">
+            <i class="bi-eye-slash-fill text-secondary bg-gradient"></i>
+            <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+              <h6 class="mb-0">Belum ada data pantauan</h6>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="card mt-4">
+        <h4 class="text-center p-3 mb-2 bg-primary bg-gradient text-white rounded-4">Shift Sore</h4>
+        <div class="list-group w-auto">
+          {% if shift_sore %} {% for sore in shift_sore %}
+          <div class="list-group-item d-flex gap-3 py-3">
+            <i class="bi-eye-fill text-success bg-gradient"></i>
+            <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+              <h6 class="mb-0">Pantauan Pukul {{sore.detail_time|time:"H:i"}} WITA</h6>
+            </div>
+          </div>
+          {% endfor %} {% else %}
+          <div class="list-group-item d-flex gap-3 py-3">
+            <i class="bi-eye-slash-fill text-secondary bg-gradient"></i>
+            <div class="d-flex gap-2 w-100 justify-content-between align-items-center">
+              <h6 class="mb-0">Belum ada data pantauan</h6>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}

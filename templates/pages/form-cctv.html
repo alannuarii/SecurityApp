@@ -12,7 +12,7 @@
             <label for="formGroupExampleInput" class="form-label">Nama Security</label>
             {% for name in names %}
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="nama_security_id" value="{{name.id}}" id="flexCheckDefault" />
+              <input class="form-check-input" type="checkbox" name="nama_security_id" value="{{name.nama_security}}" id="flexCheckDefault" />
               <label class="form-check-label" for="flexCheckDefault"> {{name.nama_security}} </label>
             </div>
             {% endfor %}

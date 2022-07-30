@@ -50,6 +50,18 @@ def form_tamu(request):
     return render(request, 'pages/form-penerimaan-tamu.html', context)
 
 
+# BUKU TAMU 
+def buku_tamu(request):
+    tamu = Tamu.objects.all()
+
+    context={
+        'title':'Buku Tamu',
+        'jadwal': jadwal_shift(),
+        'guests': tamu
+        }
+    return render(request, 'pages/buku-tamu.html', context)
+
+
 # HALAMAN FORM PATROLI
 def form_patroli(request):
     names = Security.objects.all()
@@ -207,16 +219,14 @@ def form_cctv(request):
     names = Security.objects.all()
 
     if request.method == 'POST':
+        detail_time = datetime.now()
         nama_security = request.POST.getlist('nama_security_id')
-        for i in range(len(nama_security)):
-            detail_time = datetime.now()
-            kondisi = request.POST['kondisi']
-            lokasi = request.POST['lokasi']
-            nama_security_id = nama_security[i]
-            waktu_jaga = shift(int(detail_time.strftime('%H')))
+        kondisi = request.POST['kondisi']
+        lokasi = request.POST['lokasi']
+        waktu_jaga = shift(int(detail_time.strftime('%H')))
 
-            input = CCTV(detail_time=detail_time, kondisi=kondisi, lokasi=lokasi, nama_security_id_id=nama_security_id, shift=waktu_jaga)
-            input.save()
+        input = CCTV(detail_time=detail_time, kondisi=kondisi, lokasi=lokasi, nama_security=str(nama_security), shift=waktu_jaga)
+        input.save()
         return redirect('/')
 
     context={
@@ -225,6 +235,40 @@ def form_cctv(request):
         'names': names
     }
     return render(request, 'pages/form-cctv.html', context)
+
+
+# LAPORAN CCTV
+def laporan_cctv(request):
+    today = datetime.now().strftime('%Y-%m-%d')
+    query = request.GET.get('tanggal') 
+    
+    if query:
+        query_trans = tanggal(query)
+    else:
+        query_trans = ''
+
+    shift_malam = CCTV.objects.filter(tanggal=today) & CCTV.objects.filter(shift='Malam')
+    shift_pagi = CCTV.objects.filter(tanggal=today) & CCTV.objects.filter(shift='Pagi')
+    shift_sore = CCTV.objects.filter(tanggal=today) & CCTV.objects.filter(shift='Sore')
+    
+    if 'tanggal' in request.GET:
+        query_tgl = request.GET.get('tanggal')
+        shift_malam = CCTV.objects.filter(tanggal=query_tgl) & CCTV.objects.filter(shift='Malam')
+        shift_pagi = CCTV.objects.filter(tanggal=query_tgl) & CCTV.objects.filter(shift='Pagi')
+        shift_sore = CCTV.objects.filter(tanggal=query_tgl) & CCTV.objects.filter(shift='Sore')
+        
+    context={
+        'title':'Laporan CCTV',
+        'jadwal': jadwal_shift(),
+        'today': today,
+        'query': query or None,
+        'date_today': tanggal(today),
+        'date_query': query_trans,
+        'shift_malam': shift_malam,
+        'shift_pagi': shift_pagi,
+        'shift_sore': shift_sore,
+        }
+    return render(request, 'pages/laporan-cctv.html', context)
 
 
 # HALAMAN INPUT JADWAL SECURITY

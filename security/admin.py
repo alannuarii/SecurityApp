@@ -21,7 +21,7 @@ class ApelAdmin(admin.ModelAdmin):
     list_display = ('id','tanggal','detail_time','nama_security_id','shift','atribut','foto')
 
 class CCTVAdmin(admin.ModelAdmin):
-    list_display = ('id','tanggal','detail_time','nama_security_id','shift','lokasi','kondisi')
+    list_display = ('id','tanggal','detail_time','nama_security','shift','lokasi','kondisi')
 
 class ScheduleAdmin(admin.ModelAdmin):
     list_display = ('id','periode','foto')

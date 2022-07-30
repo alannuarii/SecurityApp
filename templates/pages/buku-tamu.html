@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container laporan-patroli">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <h3 class="text-center border-bottom pb-2">BUKU TAMU</h3>
+      <label for="exampleFormControlInput1" class="form-label mt-3">Masukkan tanggal patroli</label>
+      <form action="">
+        <input type="date" class="form-control" name="tanggal" onchange="this.form.submit()" />
+      </form>
+      <div class="card mt-4">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Tanggal</th>
+              <th scope="col">Nama</th>
+              <th scope="col">Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for guest in guests %}
+            <tr>
+              <td>{{guest.tanggal}}</td>
+              <td>{{guest.nama}}</td>
+              <td>Detail</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}
