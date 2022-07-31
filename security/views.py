@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
 from security.models import Security, Pegawai, Tamu, Foto, Patroli, Apel, CCTV, Schedule
 from security.utils import *
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.conf import settings
-from tablib import Dataset
+from django.core.paginator import Paginator
 import pywhatkit as pw
 
 
-# Create your views here.
 
 # HALAMAN HOME 
 def home(request):
@@ -52,12 +51,24 @@ def form_tamu(request):
 
 # BUKU TAMU 
 def buku_tamu(request):
-    tamu = Tamu.objects.all()
+    tamus = Tamu.objects.order_by('-id')
+    
+    if 'bulan' in request.GET:
+        query = request.GET.get('bulan')
+        str_date = query+'-01'
+        to_datetime = datetime.strptime(str_date, "%Y-%m-%d").date()
+        last_datetime = to_datetime + timedelta(days=31)
+        
+        # guests = Tamu.objects.order_by('-id').filter(tanggal__range=(to_datetime, last_datetime))
+        # Setup Pagination
+        p = Paginator(Tamu.objects.order_by('-id').filter(tanggal__range=(to_datetime, last_datetime)), 2)
+        page = request.GET.get('page')
+        tamus = p.get_page(page)
 
     context={
         'title':'Buku Tamu',
         'jadwal': jadwal_shift(),
-        'guests': tamu
+        'tamus': tamus,
         }
     return render(request, 'pages/buku-tamu.html', context)
 

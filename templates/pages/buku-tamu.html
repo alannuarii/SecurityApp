@@ -1,34 +1,178 @@
-{% extends 'layouts/base.html' %} {% block title %}
+{% extends 'layouts/base.html' %} {% load static %} {% block title %}
 <title>{{title}}</title>
 {% endblock title %} {% block content %}
 <main class="container laporan-patroli">
   <div class="row">
-    <div class="col-lg-8 offset-lg-2">
+    <div class="col-lg-10 offset-lg-1">
       <h3 class="text-center border-bottom pb-2">BUKU TAMU</h3>
-      <label for="exampleFormControlInput1" class="form-label mt-3">Masukkan tanggal patroli</label>
+      <label for="exampleFormControlInput1" class="form-label mt-3">Masukkan data bulan</label>
       <form action="">
-        <input type="date" class="form-control" name="tanggal" onchange="this.form.submit()" />
+        <input type="month" class="form-control" name="bulan" onchange="this.form.submit()" />
       </form>
-      <div class="card mt-4">
-        <table class="table">
+      {% if request.GET.bulan %}
+      <div class="card mt-4 mb-2">
+        {% if tamus %}
+        <!-- For Mobile  -->
+        <table class="table text-center d-lg-none">
           <thead>
             <tr>
-              <th scope="col">Tanggal</th>
-              <th scope="col">Nama</th>
-              <th scope="col">Detail</th>
+              <th scope="col" class="align-middle">Tanggal</th>
+              <th scope="col" class="align-middle">Nama</th>
+              <th scope="col" class="align-middle">Detail</th>
             </tr>
           </thead>
           <tbody>
-            {% for guest in guests %}
+            {% for guest in tamus %}
             <tr>
-              <td>{{guest.tanggal}}</td>
-              <td>{{guest.nama}}</td>
-              <td>Detail</td>
+              <td class="align-middle">{{guest.tanggal|date:'d-m-Y'}}</td>
+              <td class="align-middle">{{guest.nama}}</td>
+              <td class="align-middle"><i class="bi-info-circle-fill text-secondary bg-gradient" data-bs-toggle="modal" data-bs-target="#modal-mobile{{guest.id}}"></i></td>
             </tr>
+            <!-- Awal Modal Mobilr  -->
+            <div class="modal fade" id="modal-mobile{{guest.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-body position-relative">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">Hari / Tanggal</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.fulldatetime}}" readonly />
+                    </div>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">Nama</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.nama}}" readonly />
+                    </div>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">Instansi</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.instansi}}" readonly />
+                    </div>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">No. Handphone</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.nohp}}" readonly />
+                    </div>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">Tujuan Berkunjung</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.tujuan}}" readonly />
+                    </div>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">Kondisi Kesehatan</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.kondisi}}" readonly />
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                      <img src="{% static guest.foto %}" class="img-fluid rounded-4" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Akhir Modal Mobile  -->
             {% endfor %}
           </tbody>
         </table>
+
+        <!-- For Desktop  -->
+        <table class="table text-center table-mobile">
+          <thead>
+            <tr>
+              <th scope="col" class="align-middle">No</th>
+              <th scope="col" class="align-middle">Hari / Tanggal</th>
+              <th scope="col" class="align-middle">Nama</th>
+              <th scope="col" class="align-middle">Instansi</th>
+              <th scope="col" class="align-middle">No. HP</th>
+              <th scope="col" class="align-middle">Tujuan</th>
+              <th scope="col" class="align-middle">Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for guest in tamus %}
+            <tr>
+              <td class="align-middle">{{forloop.counter0|add:tamus.start_index}}</td>
+              <td class="align-middle">{{guest.fulldatetime}}</td>
+              <td class="align-middle">{{guest.nama}}</td>
+              <td class="align-middle">{{guest.instansi}}</td>
+              <td class="align-middle">{{guest.nohp}}</td>
+              <td class="align-middle">{{guest.tujuan}}</td>
+              <td class="align-middle"><i class="bi-info-circle-fill text-secondary bg-gradient" data-bs-toggle="modal" data-bs-target="#modal-desktop{{guest.id}}"></i></td>
+            </tr>
+            <!-- Awal Modal Desktop  -->
+            <div class="modal fade" id="modal-desktop{{guest.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-body position-relative">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">Hari / Tanggal</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.fulldatetime}}" readonly />
+                    </div>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">Nama</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.nama}}" readonly />
+                    </div>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">Instansi</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.instansi}}" readonly />
+                    </div>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">No. Handphone</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.nohp}}" readonly />
+                    </div>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">Tujuan Berkunjung</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.tujuan}}" readonly />
+                    </div>
+                    <div class="mb-2">
+                      <label for="formGroupExampleInput" class="form-label">Kondisi Kesehatan</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" value="{{guest.kondisi}}" readonly />
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                      <img src="{% static guest.foto %}" class="img-fluid rounded-4" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Akhir Modal Desktop  -->
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="col-lg-4 offset-lg-4">
+          <img src="{% static 'img/nodata.jpg' %}" class="img-fluid" alt="" />
+          <div class="alert alert-primary text-center mx-auto" role="alert">Data tidak ditemukan</div>
+        </div>
+        {% endif %}
       </div>
+      <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            {% if tamus.number != 1 %}
+            <li class="page-item"><a class="page-link" href="?bulan={{request.GET.bulan}}&page=1">First</a></li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">First</span></li>
+            {% endif %} {% if tamus.has_previous %}
+            <li class="page-item"><a class="page-link" href="?bulan={{request.GET.bulan}}&page={{tamus.previous_page_number}}">Prev</a></li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">Prev</span></li>
+            {% endif %}
+            <li class="page-item disabled"><span class="page-link">Page {{tamus.number}} of {{tamus.paginator.num_pages}}</span></li>
+            {% if tamus.has_next %}
+            <li class="page-item"><a class="page-link" href="?bulan={{request.GET.bulan}}&page={{tamus.next_page_number}}">Next</a></li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">Next</span></li>
+            {% endif %} {% if tamus.number != tamus.paginator.num_pages %}
+            <li class="page-item di"><a class="page-link" href="?bulan={{request.GET.bulan}}&page={{tamus.paginator.num_pages}}">Last</a></li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">Last</span></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+      {% else %}
+      <div class="col-lg-4 offset-lg-4 mt-3">
+        <img src="{% static 'img/nodata.jpg' %}" class="img-fluid" alt="" />
+        <div class="alert alert-primary text-center mx-auto" role="alert">Data tidak ditemukan</div>
+      </div>
+      {% endif %}
     </div>
   </div>
 </main>

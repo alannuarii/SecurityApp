@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import datetime
+from googletrans import Translator
+
 
 # Create your models here.
 
@@ -31,6 +33,30 @@ class Tamu(models.Model):
     tujuan = models.CharField(verbose_name='Tujuan Berkunjung', max_length=150)
     kondisi = models.CharField(verbose_name='Kondisi Kesehatan', max_length=90)
     foto = models.ImageField(verbose_name='Foto Tamu', upload_to='static/upload/tamu')
+
+    def fulldatetime(self): 
+        def bulan(month):
+            if month == 'Berbaris':
+                month = 'Maret'
+                return month
+            elif month == 'Mungkin':
+                month = 'Mei'
+                return month
+            else:
+                return month
+        
+        str_tanggal = self.detail_time
+        str_hari = str_tanggal.strftime('%A')
+        str_bulan = str_tanggal.strftime('%B')
+        trans_hari = Translator().translate(str_hari, src='en', dest='id')
+        trans_bulan = Translator().translate(str_bulan, src='en', dest='id')
+        result = str_tanggal.strftime('{}, %d {} %Y %H:%M WITA'.format(trans_hari.text, bulan(trans_bulan.text)))
+        return result
+    
+    # def get_month_year(self):
+    #     month_year = self.detail_time
+    #     result = month_year.strftime('%Y-%m')
+    #     return result
 
     def __str__(self):
         return '<{} - {}>'.format(self.nama, self.tanggal)

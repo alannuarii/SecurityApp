@@ -88,6 +88,27 @@ def tanggal(input): #input berupa string tanggal 'yyyy-mm-dd'
     return result
 
 
+def tanggal_waktu(input): #input berupa datetime
+    def bulan(month):
+        if month == 'Berbaris':
+            month = 'Maret'
+            return month
+        elif month == 'Mungkin':
+            month = 'Mei'
+            return month
+        else:
+            return month
+    
+    str_tanggal = input
+    str_hari = str_tanggal.strftime('%A')
+    str_bulan = str_tanggal.strftime('%B')
+    trans_hari = Translator().translate(str_hari, src='en', dest='id')
+    trans_bulan = Translator().translate(str_bulan, src='en', dest='id')
+    result = str_tanggal.strftime('{}, %d {} %Y %H:%M WITA'.format(trans_hari.text, bulan(trans_bulan.text)))
+    
+    return result
+
+
 def jadwal_shift():
     today = datetime.now()
     tanggal_today = today.strftime('%Y-%m-%d')

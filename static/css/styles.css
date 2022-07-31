@@ -175,6 +175,10 @@ main {
 .laporan-patroli i {
   font-size: 20px;
 }
+/* Laporan Patroli  */
+.laporan-patroli .bi-info-circle-fill {
+  cursor: pointer;
+}
 
 /* LAPORAN PATROLI SHIFTY  */
 .laporan-patroli-shift .card-1 {
@@ -246,6 +250,13 @@ main {
   /* LPOARN PATROLI  */
   .laporan-patroli .card {
     padding: 20px;
+  }
+  /* Buku Tamu */
+  .laporan-patroli table {
+    font-size: 15px;
+  }
+  .laporan-patroli .table-mobile {
+    display: none;
   }
 
   /* LAPORAN PATROLI SHIFT  */
