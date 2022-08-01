@@ -71,6 +71,15 @@ main {
   }
 }
 
+/* SIGN IN  */
+.sign-in {
+  max-width: 330px;
+  padding: 15px;
+}
+.sign-in p {
+  font-size: 10px;
+}
+
 /* NAVBAR  */
 .nav-scroller .nav {
   color: rgba(255, 255, 255, 0.75);
@@ -210,6 +219,11 @@ main {
   }
   .navbar .btn-offcanvas {
     display: none;
+  }
+
+  /* SIGN IN  */
+  .sign-in p {
+    font-size: 10px;
   }
 
   /* HOME  */

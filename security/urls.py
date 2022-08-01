@@ -7,6 +7,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('baton/', include('baton.urls')),
     path('', views.home, name='home'),
+    path('sign-in', views.sign_in, name='sign_in'),
+    path('sign-out', views.sign_out, name='sign_out'),
     path('form-penerimaan-tamu', views.form_tamu, name='form_tamu'),
     path('buku-tamu', views.buku_tamu, name='buku_tamu'),
     path('selamat-datang', views.selamat_datang, name='selamat_datang'),

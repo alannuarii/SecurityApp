@@ -6,7 +6,7 @@
     <div class="col-lg-10 offset-lg-1">
       <h3 class="text-center border-bottom pb-2">BUKU TAMU</h3>
       <label for="exampleFormControlInput1" class="form-label mt-3">Masukkan data bulan</label>
-      <form action="">
+      <form action="" class="col-lg-4">
         <input type="month" class="form-control" name="bulan" onchange="this.form.submit()" />
       </form>
       {% if request.GET.bulan %}

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'includes/styles.html' %} {% block title %}{% endblock title %}
+    <!-- Favicons -->
+    <!-- <link href="" rel="icon" /> -->
+  </head>
+  <body>
+    {% block content %}
+    <main class="container sign-in position-absolute top-50 start-50 translate-middle">
+      <div class="row text-center">
+        <form action="" method="post">
+          {% csrf_token %}
+          <h1 class="h3 mb-3 fw-normal">SecurityApp</h1>
+          <div class="input-group mb-2">
+            <span class="input-group-text" id="basic-addon1"><i class="bi-person-circle"></i></span>
+            <input type="text" class="form-control" placeholder="Username" name="username" />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="bi-key-fill"></i></span>
+            <input type="password" class="form-control" placeholder="Password" name="password" />
+          </div>
+
+          <button class="w-100 btn btn-primary" type="submit">Sign in</button>
+          <p class="mt-4 text-muted">Copyright © 2022 - PT PLN (Persero) ULPLTD Kotamobagu</p>
+        </form>
+      </div>
+    </main>
+    {% endblock content %}{% include 'includes/preloader.html' %}{% include 'includes/scripts.html' %}
+  </body>
+</html>

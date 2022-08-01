@@ -4,11 +4,46 @@ from security.utils import *
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 import pywhatkit as pw
 
 
 
+# HALAMAN SIGN-IN 
+def sign_in(request):
+    context={
+        'title':'Sign In',
+        }
+
+    user = None
+
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('/')
+        else:
+            return render(request, 'pages/sign-in.html', context)
+    
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            return redirect('/sign-in')
+
+
+# Fungsi Sign Out 
+def sign_out(request):
+    logout(request)
+    return redirect('/sign-in')
+
+
 # HALAMAN HOME 
+@login_required(login_url='sign_in')
 def home(request):
     jam = datetime.now().strftime('%H')
     tanggal = datetime.now().strftime('%Y-%m-%d')
@@ -50,6 +85,7 @@ def form_tamu(request):
 
 
 # BUKU TAMU 
+@login_required(login_url='sign_in')
 def buku_tamu(request):
     tamus = Tamu.objects.order_by('-id')
     
@@ -57,7 +93,7 @@ def buku_tamu(request):
         query = request.GET.get('bulan')
         str_date = query+'-01'
         to_datetime = datetime.strptime(str_date, "%Y-%m-%d").date()
-        last_datetime = to_datetime + timedelta(days=31)
+        last_datetime = to_datetime + timedelta(days=30)
         
         # guests = Tamu.objects.order_by('-id').filter(tanggal__range=(to_datetime, last_datetime))
         # Setup Pagination
@@ -74,6 +110,7 @@ def buku_tamu(request):
 
 
 # HALAMAN FORM PATROLI
+@login_required(login_url='sign_in')
 def form_patroli(request):
     names = Security.objects.all()
 
@@ -100,6 +137,7 @@ def form_patroli(request):
 
 
 # LAPORAN PATROLI 
+@login_required(login_url='sign_in')
 def laporan_patroli(request):
     today = datetime.now().strftime('%Y-%m-%d')
     query = request.GET.get('tanggal') 
@@ -153,6 +191,7 @@ def laporan_patroli(request):
 
 
 # LAPORAN PATROLI SHIFT
+@login_required(login_url='sign_in')
 def laporan_patroli_shift(request, tanggal, waktu):
     report_patroli = Patroli.objects.filter(tanggal=tanggal) & Patroli.objects.filter(waktu=waktu)
     report_foto = Foto.objects.filter(tanggal=tanggal) & Foto.objects.filter(waktu=waktu)
@@ -167,6 +206,7 @@ def laporan_patroli_shift(request, tanggal, waktu):
 
 
 # HALAMAN FORM APEL
+@login_required(login_url='sign_in')
 def form_apel(request):
     names = Security.objects.all()
 
@@ -192,6 +232,7 @@ def form_apel(request):
 
 
 # LAPORAN APEL
+@login_required(login_url='sign_in')
 def laporan_apel(request):
     today = datetime.now().strftime('%Y-%m-%d')
     query = request.GET.get('tanggal') 
@@ -226,6 +267,7 @@ def laporan_apel(request):
 
 
 # HALAMAN FORM CCTV
+@login_required(login_url='sign_in')
 def form_cctv(request):
     names = Security.objects.all()
 
@@ -249,6 +291,7 @@ def form_cctv(request):
 
 
 # LAPORAN CCTV
+@login_required(login_url='sign_in')
 def laporan_cctv(request):
     today = datetime.now().strftime('%Y-%m-%d')
     query = request.GET.get('tanggal') 
@@ -283,6 +326,7 @@ def laporan_cctv(request):
 
 
 # HALAMAN INPUT JADWAL SECURITY
+@login_required(login_url='sign_in')
 def form_jadwal(request):
     
     if request.method == 'POST':
@@ -297,6 +341,7 @@ def form_jadwal(request):
 
 
 # HALAMAN JADWAL SECURITY
+@login_required(login_url='sign_in')
 def jadwal_security(request):
     jadwal_security = Schedule.objects.last()
     print(jadwal_security)
@@ -310,6 +355,7 @@ def jadwal_security(request):
 
 
 # HALAMAN EMERGENCY CALL
+@login_required(login_url='sign_in')
 def emergency_call(request):
     context={
         'title':'Emergency Call', 
@@ -319,6 +365,7 @@ def emergency_call(request):
 
 
 # HALAMAN SOP
+@login_required(login_url='sign_in')
 def sop(request):
     context={
         'title':'S O P',
@@ -328,6 +375,7 @@ def sop(request):
 
 
 # CAMERA ACTION
+@login_required(login_url='sign_in')
 def camera_action(request):
     if request.method == 'POST':
         foto = request.POST['foto']
