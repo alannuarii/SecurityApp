@@ -232,12 +232,15 @@ main {
     padding-top: 80px;
   }
   .home .card {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 20px;
   }
   .home .card i {
-    font-size: 50px;
+    font-size: 35px;
+  }
+  .home .col-6 h6 {
+    font-size: 12px;
   }
   .bot-navbar .container-fluid {
     height: 35px;

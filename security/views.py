@@ -6,7 +6,7 @@ from django.conf import settings
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-import pywhatkit as pw
+# import pywhatkit as pw
 
 
 
@@ -125,8 +125,8 @@ def form_patroli(request):
 
         input = Patroli(detail_time=detail_time, lokasi=lokasi, kondisi=kondisi, nama_security_id_id=nama_security_id, shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Patroli',tengah=names[int(nama_security_id)-1].nama_security), waktu=waktu)
         input.save()
-        pw.sendwhatmsg_to_group_instantly("BoqTd9gtvEt9ioXc5RqWee", "LAPORAN PATROLI \n{} \nLokasi: {} \nSecurity Patroli: {} \nKondisi: {} \nDetail Laporan: \nhttp://127.0.0.1:8000/laporan-patroli-shift/{}/{}".format(detail_time.strftime('Tanggal %d-%m-%Y Pukul %H:%M WITA'), lokasi, names[int(nama_security_id) - 1].nama_security, kondisi, detail_time.strftime('%Y-%m-%d'), str(waktu)))
-        return redirect('/')
+        # pw.sendwhatmsg_to_group_instantly("BoqTd9gtvEt9ioXc5RqWee", "LAPORAN PATROLI \n{} \nLokasi: {} \nSecurity Patroli: {} \nKondisi: {} \nDetail Laporan: \nhttp://127.0.0.1:8000/laporan-patroli-shift/{}/{}".format(detail_time.strftime('Tanggal %d-%m-%Y Pukul %H:%M WITA'), lokasi, names[int(nama_security_id) - 1].nama_security, kondisi, detail_time.strftime('%Y-%m-%d'), str(waktu)))
+        # return redirect('/')
 
     context={
         'title':'Form Patroli',

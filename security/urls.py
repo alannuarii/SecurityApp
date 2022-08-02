@@ -1,5 +1,8 @@
 from baton.autodiscover import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.conf.urls.static import static
+from django.conf import settings
+from django.views.static import serve
 # from . import views
 from security import views
 
@@ -14,7 +17,7 @@ urlpatterns = [
     path('selamat-datang', views.selamat_datang, name='selamat_datang'),
     path('form-patroli', views.form_patroli, name='form_patroli'),
     path('laporan-patroli', views.laporan_patroli, name='laporan_patroli'),
-    path('laporan-patroli-shift/<str:tanggal>/<int:waktu>', views.laporan_patroli_shift, name='laporan_patroli_shift'),
+    path('laporan-patroli-shift/<str:tanggal>/<int:waktu>/', views.laporan_patroli_shift, name='laporan_patroli_shift'),
     path('form-apel', views.form_apel, name='form_apel'),
     path('laporan-apel', views.laporan_apel, name='laporan_apel'),
     path('form-cctv', views.form_cctv, name='form_cctv'),
@@ -24,7 +27,6 @@ urlpatterns = [
     path('emergency-call', views.emergency_call, name='emergency_call'),
     path('sop', views.sop, name='sop'),
     path('camera-action', views.camera_action, name='camera_action'),
-    
-    # path('login', views.loginView, name='login'),
-    # path('logout', views.CustomLogoutView.as_view(), name='logout'),
-]
+    # re_path(r'^media/(?P<path>.*)$', serve,
+    #         {'document_root': settings.MEDIA_ROOT}), 
+]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
