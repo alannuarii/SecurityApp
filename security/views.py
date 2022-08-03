@@ -196,7 +196,6 @@ def laporan_patroli_shift(request, tanggal, waktu):
     report_patroli = Patroli.objects.filter(tanggal=tanggal) & Patroli.objects.filter(waktu=waktu)
     report_foto = Foto.objects.filter(tanggal=tanggal) & Foto.objects.filter(waktu=waktu)
 
-    print(report_patroli)
     context={
         'title':'Laporan Patroli',
         'patroli': report_patroli,
@@ -344,7 +343,6 @@ def form_jadwal(request):
 @login_required(login_url='sign_in')
 def jadwal_security(request):
     jadwal_security = Schedule.objects.last()
-    print(jadwal_security)
 
     context={
         'title':'Jadwal Security',
