@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.core.files.base import ContentFile
 from security.models import Apel
 from googletrans import Translator
@@ -110,7 +110,7 @@ def tanggal_waktu(input): #input berupa datetime
 
 
 def jadwal_shift():
-    today = datetime.now()
+    today = datetime.now() - timedelta(hours=-8)
     tanggal_today = today.strftime('%Y-%m-%d')
     waktu = shift(int(today.strftime('%H')))
     jadwal_security = Apel.objects.filter(tanggal=tanggal_today) & Apel.objects.filter(shift=waktu)

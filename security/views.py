@@ -45,8 +45,9 @@ def sign_out(request):
 # HALAMAN HOME 
 @login_required(login_url='sign_in')
 def home(request):
-    jam = datetime.now().strftime('%H')
-    tanggal = datetime.now().strftime('%Y-%m-%d')
+    _today = datetime.now() - timedelta(hours=-8)
+    jam = _today.strftime('%H')
+    tanggal = _today.strftime('%Y-%m-%d')
     report_foto = Foto.objects.filter(waktu=patroli(int(jam))) & Foto.objects.filter(tanggal=tanggal)
     report_patroli = Patroli.objects.filter(waktu=patroli(int(jam))) & Patroli.objects.filter(tanggal=tanggal)
 
@@ -72,7 +73,8 @@ def form_tamu(request):
         pegawai = request.POST['pegawai']
         kondisi = request.POST['kondisi']
         foto = request.POST['foto']
-        input = Tamu(nama=nama, instansi=instansi, nohp=nohp, tujuan=tujuan, kondisi=kondisi, foto=base64tojpg1(foto,'Tamu',nama), detail_time=datetime.now())
+        input = Tamu(nama=nama, instansi=instansi, nohp=nohp, tujuan=tujuan, kondisi=kondisi, foto=base64tojpg1(foto,'Tamu',nama), detail_time=datetime.now() - timedelta(hours=-8))
+        input.real_date()
         input.save()
         return redirect('/selamat-datang')
         
@@ -115,7 +117,7 @@ def form_patroli(request):
     names = Security.objects.all()
 
     if request.method == 'POST':
-        detail_time = datetime.now()
+        detail_time = datetime.now() - timedelta(hours=-8)
         lokasi = request.POST['lokasi']
         kondisi = request.POST['kondisi']
         foto = request.POST['foto']
@@ -124,9 +126,10 @@ def form_patroli(request):
         waktu = patroli(int(detail_time.strftime('%H')))
 
         input = Patroli(detail_time=detail_time, lokasi=lokasi, kondisi=kondisi, nama_security_id_id=nama_security_id, shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Patroli',tengah=names[int(nama_security_id)-1].nama_security), waktu=waktu)
+        input.real_date()
         input.save()
         # pw.sendwhatmsg_to_group_instantly("BoqTd9gtvEt9ioXc5RqWee", "LAPORAN PATROLI \n{} \nLokasi: {} \nSecurity Patroli: {} \nKondisi: {} \nDetail Laporan: \nhttp://127.0.0.1:8000/laporan-patroli-shift/{}/{}".format(detail_time.strftime('Tanggal %d-%m-%Y Pukul %H:%M WITA'), lokasi, names[int(nama_security_id) - 1].nama_security, kondisi, detail_time.strftime('%Y-%m-%d'), str(waktu)))
-        # return redirect('/')
+        return redirect('/')
 
     context={
         'title':'Form Patroli',
@@ -139,7 +142,8 @@ def form_patroli(request):
 # LAPORAN PATROLI 
 @login_required(login_url='sign_in')
 def laporan_patroli(request):
-    today = datetime.now().strftime('%Y-%m-%d')
+    _today = datetime.now() - timedelta(hours=-8)
+    today = _today.strftime('%Y-%m-%d')
     query = request.GET.get('tanggal') 
     
     if query:
@@ -211,13 +215,14 @@ def form_apel(request):
     if request.method == 'POST':
         nama_security = request.POST.getlist('nama_security_id')
         for i in range(len(nama_security)):
-            detail_time = datetime.now()
+            detail_time = datetime.now() - timedelta(hours=-8)
             atribut = request.POST['atribut']
             foto = request.POST['foto']
             nama_security_id = nama_security[i]
             waktu_jaga = shift(int(detail_time.strftime('%H')))
 
             input = Apel(detail_time=detail_time, atribut=atribut, nama_security_id_id=nama_security_id, shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Apel',tengah=names[int(nama_security_id)-1].nama_security))
+            input.real_date()
             input.save()
         return redirect('/')
 
@@ -232,7 +237,8 @@ def form_apel(request):
 # LAPORAN APEL
 @login_required(login_url='sign_in')
 def laporan_apel(request):
-    today = datetime.now().strftime('%Y-%m-%d')
+    _today = datetime.now() - timedelta(hours=-8)
+    today = _today.strftime('%Y-%m-%d')
     query = request.GET.get('tanggal') 
     
     if query:
@@ -270,13 +276,14 @@ def form_cctv(request):
     names = Security.objects.all()
 
     if request.method == 'POST':
-        detail_time = datetime.now()
+        detail_time = datetime.now() - timedelta(hours=-8)
         nama_security = request.POST.getlist('nama_security_id')
         kondisi = request.POST['kondisi']
         lokasi = request.POST['lokasi']
         waktu_jaga = shift(int(detail_time.strftime('%H')))
 
         input = CCTV(detail_time=detail_time, kondisi=kondisi, lokasi=lokasi, nama_security=str(nama_security), shift=waktu_jaga)
+        input.real_date()
         input.save()
         return redirect('/')
 
@@ -291,7 +298,8 @@ def form_cctv(request):
 # LAPORAN CCTV
 @login_required(login_url='sign_in')
 def laporan_cctv(request):
-    today = datetime.now().strftime('%Y-%m-%d')
+    _today = datetime.now() - timedelta(hours=-8)
+    today = _today.strftime('%Y-%m-%d')
     query = request.GET.get('tanggal') 
     
     if query:
@@ -376,9 +384,10 @@ def sop(request):
 def camera_action(request):
     if request.method == 'POST':
         foto = request.POST['foto']
-        detail_time = datetime.now()
+        detail_time = datetime.now() - timedelta(hours=-8)
         waktu = patroli(int(detail_time.strftime('%H')))
         input = Foto(foto=base64tojpg2(fotobase64=foto), detail_time=detail_time, waktu=waktu)
+        input.real_date()
         input.save()
 
     context={

@@ -1,6 +1,6 @@
 from django.db import models
-from datetime import datetime
 from googletrans import Translator
+from datetime import datetime
 
 
 # Create your models here.
@@ -25,7 +25,7 @@ class Pegawai(models.Model):
 
 # Model Buku Tamu 
 class Tamu(models.Model):
-    tanggal = models.DateField(verbose_name='Tanggal', auto_now=True)
+    tanggal = models.DateField(verbose_name='Tanggal')
     detail_time = models.DateTimeField(verbose_name='Timestamp')
     nama = models.CharField(verbose_name='Nama Lengkap', max_length=30)
     instansi = models.CharField(verbose_name='Instansi', max_length=50)
@@ -52,11 +52,9 @@ class Tamu(models.Model):
         trans_bulan = Translator().translate(str_bulan, src='en', dest='id')
         result = str_tanggal.strftime('{}, %d {} %Y %H:%M WITA'.format(trans_hari.text, bulan(trans_bulan.text)))
         return result
-    
-    # def get_month_year(self):
-    #     month_year = self.detail_time
-    #     result = month_year.strftime('%Y-%m')
-    #     return result
+
+    def real_date(self):
+        self.tanggal = self.detail_time.date()
 
     def __str__(self):
         return '<{} - {}>'.format(self.nama, self.tanggal)
@@ -64,10 +62,13 @@ class Tamu(models.Model):
 
 # Model Foto Patroli
 class Foto(models.Model):
-    tanggal = models.DateField(verbose_name='Tanggal', auto_now=True)
+    tanggal = models.DateField(verbose_name='Tanggal')
     detail_time = models.DateTimeField(verbose_name='Timestamp')
     waktu = models.IntegerField(verbose_name='Waktu Patroli')
     foto = models.ImageField(verbose_name='Foto Patroli', upload_to='static/upload/patroli')
+
+    def real_date(self):
+        self.tanggal = self.detail_time.date()
 
     def __str__(self):
         return '<Shift {} : {}>'.format(self.waktu, self.tanggal)
@@ -75,14 +76,17 @@ class Foto(models.Model):
 
 # Model Patroli
 class Patroli(models.Model):
-    tanggal = models.DateField(verbose_name='Tanggal', auto_now=True)
+    tanggal = models.DateField(verbose_name='Tanggal')
     detail_time = models.DateTimeField(verbose_name='Timestamp')
     shift = models.CharField(verbose_name='Shift', max_length=10)
     waktu = models.IntegerField(verbose_name='Waktu Patroli')
     lokasi = models.CharField(verbose_name='Lokasi', max_length=200)
     kondisi = models.CharField(verbose_name='Kondisi Kesehatan', max_length=200)
-    foto = models.ImageField(verbose_name='Foto Security', upload_to='static/upload/security patroli')
+    foto = models.ImageField(verbose_name='Foto Security', upload_to='static/upload/security_patroli')
     nama_security_id = models.ForeignKey(Security, on_delete=models.CASCADE, verbose_name='Nama Security')
+
+    def real_date(self):
+        self.tanggal = self.detail_time.date()
 
     def __str__(self):
         return '<Shift {} : {}>'.format(self.shift, self.tanggal)
@@ -90,12 +94,15 @@ class Patroli(models.Model):
 
 # Model Apel
 class Apel(models.Model):
-    tanggal = models.DateField(verbose_name='Tanggal', auto_now=True)
+    tanggal = models.DateField(verbose_name='Tanggal')
     detail_time = models.DateTimeField(verbose_name='Timestamp')
     shift = models.CharField(verbose_name='Shift', max_length=10)
     atribut = models.CharField(verbose_name='Atribut', max_length=200)
     foto = models.ImageField(verbose_name='Foto Apel', upload_to='static/upload/apel')
     nama_security_id = models.ForeignKey(Security, on_delete=models.CASCADE, verbose_name='Nama Security')
+
+    def real_date(self):
+        self.tanggal = self.detail_time.date()
 
     def __str__(self):
         return '<Shift {} : {}>'.format(self.shift, self.tanggal)
@@ -103,13 +110,15 @@ class Apel(models.Model):
 
 # Model CCTV 
 class CCTV(models.Model):
-    tanggal = models.DateField(verbose_name='Tanggal', auto_now=True)
+    tanggal = models.DateField(verbose_name='Tanggal')
     detail_time = models.DateTimeField(verbose_name='Timestamp')
     nama_security = models.CharField(verbose_name='Nama Secuirty', max_length=100)
     shift = models.CharField(verbose_name='Shift', max_length=10)
     kondisi = models.CharField(verbose_name='Kondisi', max_length=200)
     lokasi = models.CharField(verbose_name='Lokasi', max_length=100)
     
+    def real_date(self):
+        self.tanggal = self.detail_time.date()
 
     def __str__(self):
         return '<Shift {} : {}>'.format(self.shift, self.tanggal)
