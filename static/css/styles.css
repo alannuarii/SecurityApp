@@ -248,6 +248,9 @@ main {
   .bot-navbar a {
     border: 7px solid #fff;
   }
+  .bot-navbar .sudah-patroli {
+    border: 7px solid #fff;
+  }
   .bot-navbar .bi-camera {
     font-size: 30px;
   }

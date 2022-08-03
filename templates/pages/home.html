@@ -78,7 +78,11 @@
 </main>
 <nav class="navbar bot-navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark d-lg-none">
   <div class="container-fluid position-relative">
+    {% if patrolis %}
+    <div class="btn btn-primary bg-gradient rounded-circle position-absolute top-0 start-50 translate-middle sudah-patroli" data-bs-toggle="modal" data-bs-target="#modal-sudah"><i class="bi-camera"></i></div>
+    {% else %}
     <a href="{% url 'camera_action' %}" id="camera" class="btn btn-primary bg-gradient rounded-circle position-absolute top-0 start-50 translate-middle"><i class="bi-camera"></i></a>
+    {% endif %}
   </div>
 </nav>
 {% endblock content %}

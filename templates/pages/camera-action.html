@@ -112,7 +112,10 @@
       // switch camera
       btnChangeCamera.addEventListener("click", function () {
         useFrontCamera = !useFrontCamera;
-
+        if ((btnPlay.style.display = "inline")) {
+          btnPause.style.display = "inline";
+          btnPlay.style.display = "none";
+        }
         initializeCamera();
       });
 
