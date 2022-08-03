@@ -126,7 +126,6 @@ main {
 .home .card {
   width: 150px;
   height: 150px;
-  border-radius: 35px;
 }
 .home .card i {
   font-size: 80px;
@@ -234,13 +233,15 @@ main {
   .home .card {
     width: 80px;
     height: 80px;
-    border-radius: 20px;
   }
   .home .card i {
     font-size: 35px;
   }
   .home .col-6 h6 {
     font-size: 12px;
+  }
+  .home .alert .bi-whatsapp {
+    font-size: 30px;
   }
   .bot-navbar .container-fluid {
     height: 35px;

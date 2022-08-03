@@ -191,7 +191,6 @@ def laporan_patroli(request):
 
 
 # LAPORAN PATROLI SHIFT
-@login_required(login_url='sign_in')
 def laporan_patroli_shift(request, tanggal, waktu):
     report_patroli = Patroli.objects.filter(tanggal=tanggal) & Patroli.objects.filter(waktu=waktu)
     report_foto = Foto.objects.filter(tanggal=tanggal) & Foto.objects.filter(waktu=waktu)
