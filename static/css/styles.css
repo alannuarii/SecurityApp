@@ -76,7 +76,13 @@ main {
   max-width: 330px;
   padding: 15px;
 }
-.sign-in p {
+.sign-in .alert i {
+  font-size: 30px;
+}
+.sign-in .alert h6 {
+  font-size: 13px;
+}
+.sign-in .copyright {
   font-size: 10px;
 }
 

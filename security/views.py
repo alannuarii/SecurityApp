@@ -6,18 +6,20 @@ from django.conf import settings
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 # import pywhatkit as pw
 
 
 
 # HALAMAN SIGN-IN 
 def sign_in(request):
+    
     context={
         'title':'Sign In',
         }
 
     user = None
-
+    
     if request.method == 'GET':
         if request.user.is_authenticated:
             return redirect('/')
@@ -33,8 +35,9 @@ def sign_in(request):
             login(request, user)
             return redirect('/')
         else:
+            messages.error(request, 'Username atau password Anda tidak tepat')
             return redirect('/sign-in')
-
+    
 
 # Fungsi Sign Out 
 def sign_out(request):
@@ -52,7 +55,6 @@ def home(request):
     report_patroli = Patroli.objects.filter(waktu=patroli(int(jam))) & Patroli.objects.filter(tanggal=tanggal)
     report_apel = Apel.objects.filter(shift=shift(int(jam))) & Apel.objects.filter(tanggal=tanggal)
 
-    print(report_apel)
     context={
         'title':'Beranda',
         'photos': report_foto,
