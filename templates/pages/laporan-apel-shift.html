@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %} {% load static %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container laporan-patroli-shift">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <h3 class="text-center border-bottom pb-2">LAPORAN APEL</h3>
+      <div class="card card-1 mt-4">
+        <div class="row mb-1 mb-lg-3">
+          <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">Hari / Tanggal</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" id="colFormLabel" value="{{apel.0.fulldatetime}}" readonly />
+          </div>
+        </div>
+        <div class="row mb-1 mb-lg-3">
+          <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">Shift</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" id="colFormLabel" value="{{apel.0.shift}}" readonly />
+          </div>
+        </div>
+        <div class="row mb-3 mb-lg-3">
+          <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">Kelengkapan Atribut</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" id="colFormLabel" value="{{apel.0.atribut}}" readonly />
+          </div>
+        </div>
+        <div class="row mb-1 mb-lg-3">
+          <h6 class="text-center fw-normal">Petugas Apel</h6>
+          <figure class="figure d-flex flex-column justify-content-center">
+            <img src="{% static apel.0.foto %}" class="figure-img img-fluid rounded-4" alt="..." />
+            <figcaption class="figure-caption text-center">{{apel.0.nama_security_id.nama_security}}</figcaption>
+            {% if apel.1.nama_security_id %}
+            <figcaption class="figure-caption text-center">{{apel.1.nama_security_id.nama_security}}</figcaption>
+            {% endif %}
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}

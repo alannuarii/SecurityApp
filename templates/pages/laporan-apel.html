@@ -18,9 +18,9 @@
       <div class="card mt-4">
         <div class="list-group w-auto">
           {% if query %}
-          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          <a href="{% url 'laporan_apel_shift' tanggal=query shift='Malam' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
           {% else %}
-          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          <a href="{% url 'laporan_apel_shift' tanggal=today shift='Malam' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
           {% endif %}
             {% if shift_malam.0.shift == 'Malam' %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
@@ -32,9 +32,9 @@
             </div>
           </a>
           {% if query %}
-          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          <a href="{% url 'laporan_apel_shift' tanggal=query shift='Pagi' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
           {% else %}
-          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          <a href="{% url 'laporan_apel_shift' tanggal=today shift='Pagi' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
           {% endif %}
             {% if shift_pagi.0.shift == 'Pagi' %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>
@@ -46,9 +46,9 @@
             </div>
           </a>
           {% if query %}
-          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          <a href="{% url 'laporan_apel_shift' tanggal=query shift='Sore' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
           {% else %}
-          <a href="" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+          <a href="{% url 'laporan_apel_shift' tanggal=today shift='Sore' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
           {% endif %}
             {% if shift_sore.0.shift == 'Sore' %}
             <i class="bi-check-circle-fill text-success bg-gradient"></i>

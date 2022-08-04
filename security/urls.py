@@ -20,6 +20,7 @@ urlpatterns = [
     path('laporan-patroli-shift/<str:tanggal>/<int:waktu>/', views.laporan_patroli_shift, name='laporan_patroli_shift'),
     path('form-apel', views.form_apel, name='form_apel'),
     path('laporan-apel', views.laporan_apel, name='laporan_apel'),
+    path('laporan-apel-shift/<str:tanggal>/<str:shift>/', views.laporan_apel_shift, name='laporan_apel_shift'),
     path('form-cctv', views.form_cctv, name='form_cctv'),
     path('laporan-cctv', views.laporan_cctv, name='laporan_cctv'),
     path('form-jadwal', views.form_jadwal, name='form_jadwal'),

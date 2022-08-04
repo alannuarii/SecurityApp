@@ -5,12 +5,8 @@
   <div class="row d-lg-none px-3 mb-2">
     {% if patrolis %}
     <div class="alert alert-success rounded-4 position-relative" role="alert">
-      <a href="https://wa.me/+6285340029197" target="_blank"><i class="bi-whatsapp position-absolute top-0 end-0 text-success pt-2 pe-3"></i></a>
-      <input
-        type="text"
-        class="send-wa d-none"
-        value="Laporan Patroli Tanggal {{patrolis.0.detail_time|date:'d-m-Y'}} {{patrolis.0.detail_time|time:'H:i'}} WITA: https://securityapp.alan.web.id/laporan-patroli-shift/{{patrolis.0.tanggal|date:'Y-m-d'}}/{{patrolis.0.waktu}}"
-      />
+      <div><i class="bi-whatsapp position-absolute top-0 end-0 text-success pt-2 pe-3"></i></div>
+      <input type="text" class="send-wa d-none" value="Laporan Patroli {{patrolis.0.fulldatetime}}: https://securityapp.alan.web.id/laporan-patroli-shift/{{patrolis.0.tanggal|date:'Y-m-d'}}/{{patrolis.0.waktu}}" />
       <h4 class="alert-heading"><i class="bi-check-circle-fill text-success bg-gradient"></i> Well done!</h4>
       <hr />
       <p>Patroli telah dilaksanakan oleh <strong>{{patrolis.0.nama_security_id.nama_security}}</strong> pada pukul {{patrolis.0.detail_time|time:"H:i"}} WITA</p>
@@ -39,7 +35,11 @@
       <h6 class="text-center mt-2">Form Patroli</h6>
     </div>
     <div class="col-6 col-lg-4 mb-4 mb-lg-0">
+      {% if apels %}
+      <div class="card rounded-circle btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient" data-bs-toggle="modal" data-bs-target="#modal-apel"><i class="bi-people text-light"></i></div>
+      {% else %}
       <a href="{% url 'form_apel' %}" class="card rounded-circle btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-people text-light"></i></a>
+      {% endif %}
       <h6 class="text-center mt-2">Form Apel</h6>
     </div>
     <div class="col-6 col-lg-4 mb-4 mb-lg-0">
@@ -81,14 +81,28 @@
     </div>
   </div>
   <!-- Akhir Modal Belum Patroli  -->
+  <!-- Awal Modal Selesai Patroli  -->
+  <div class="modal fade" id="modal-apel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center position-relative">
+          <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          <i class="bi-check-circle-fill text-success"></i>
+          <h5>Apel shift {{apels.0.shift|lower}} telah dilaksanakan</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Akhir Modal Selesai Patroli  -->
   <script>
     const wa = document.querySelector(".home .bi-whatsapp");
     const sendWA = document.querySelector(".send-wa");
 
-    wa.addEventListener("click", (e) => {
+    wa.addEventListener("click", () => {
       sendWA.select();
       sendWA.setSelectionRange(0, 99999);
       navigator.clipboard.writeText(sendWA.value);
+      location.href = "https://wa.me/+6282187570774";
     });
   </script>
 </main>

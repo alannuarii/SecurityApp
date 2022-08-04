@@ -85,6 +85,25 @@ class Patroli(models.Model):
     foto = models.ImageField(verbose_name='Foto Security', upload_to='static/upload/security_patroli')
     nama_security_id = models.ForeignKey(Security, on_delete=models.CASCADE, verbose_name='Nama Security')
 
+    def fulldatetime(self): 
+        def bulan(month):
+            if month == 'Berbaris':
+                month = 'Maret'
+                return month
+            elif month == 'Mungkin':
+                month = 'Mei'
+                return month
+            else:
+                return month
+        
+        str_tanggal = self.detail_time
+        str_hari = str_tanggal.strftime('%A')
+        str_bulan = str_tanggal.strftime('%B')
+        trans_hari = Translator().translate(str_hari, src='en', dest='id')
+        trans_bulan = Translator().translate(str_bulan, src='en', dest='id')
+        result = str_tanggal.strftime('{}, %d {} %Y %H:%M WITA'.format(trans_hari.text, bulan(trans_bulan.text)))
+        return result
+
     def real_date(self):
         self.tanggal = self.detail_time.date()
 
@@ -100,6 +119,25 @@ class Apel(models.Model):
     atribut = models.CharField(verbose_name='Atribut', max_length=200)
     foto = models.ImageField(verbose_name='Foto Apel', upload_to='static/upload/apel')
     nama_security_id = models.ForeignKey(Security, on_delete=models.CASCADE, verbose_name='Nama Security')
+
+    def fulldatetime(self): 
+        def bulan(month):
+            if month == 'Berbaris':
+                month = 'Maret'
+                return month
+            elif month == 'Mungkin':
+                month = 'Mei'
+                return month
+            else:
+                return month
+        
+        str_tanggal = self.detail_time
+        str_hari = str_tanggal.strftime('%A')
+        str_bulan = str_tanggal.strftime('%B')
+        trans_hari = Translator().translate(str_hari, src='en', dest='id')
+        trans_bulan = Translator().translate(str_bulan, src='en', dest='id')
+        result = str_tanggal.strftime('{}, %d {} %Y %H:%M WITA'.format(trans_hari.text, bulan(trans_bulan.text)))
+        return result
 
     def real_date(self):
         self.tanggal = self.detail_time.date()
@@ -117,6 +155,25 @@ class CCTV(models.Model):
     kondisi = models.CharField(verbose_name='Kondisi', max_length=200)
     lokasi = models.CharField(verbose_name='Lokasi', max_length=100)
     
+    def fulldatetime(self): 
+        def bulan(month):
+            if month == 'Berbaris':
+                month = 'Maret'
+                return month
+            elif month == 'Mungkin':
+                month = 'Mei'
+                return month
+            else:
+                return month
+        
+        str_tanggal = self.detail_time
+        str_hari = str_tanggal.strftime('%A')
+        str_bulan = str_tanggal.strftime('%B')
+        trans_hari = Translator().translate(str_hari, src='en', dest='id')
+        trans_bulan = Translator().translate(str_bulan, src='en', dest='id')
+        result = str_tanggal.strftime('{}, %d {} %Y %H:%M WITA'.format(trans_hari.text, bulan(trans_bulan.text)))
+        return result
+
     def real_date(self):
         self.tanggal = self.detail_time.date()
 

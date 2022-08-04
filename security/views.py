@@ -50,12 +50,15 @@ def home(request):
     tanggal = _today.strftime('%Y-%m-%d')
     report_foto = Foto.objects.filter(waktu=patroli(int(jam))) & Foto.objects.filter(tanggal=tanggal)
     report_patroli = Patroli.objects.filter(waktu=patroli(int(jam))) & Patroli.objects.filter(tanggal=tanggal)
+    report_apel = Apel.objects.filter(shift=shift(int(jam))) & Apel.objects.filter(tanggal=tanggal)
 
+    print(report_apel)
     context={
         'title':'Beranda',
         'photos': report_foto,
         'patrolis': report_patroli,
         'jadwal': jadwal_shift(),
+        'apels': report_apel,
         }
     return render(request, 'pages/home.html', context)
 
@@ -268,6 +271,17 @@ def laporan_apel(request):
         'shift_sore': shift_sore,
         }
     return render(request, 'pages/laporan-apel.html', context)
+
+
+# LAPORAN APEL SHIFT
+def laporan_apel_shift(request, tanggal, shift):
+    report_apel = Apel.objects.filter(tanggal=tanggal) & Apel.objects.filter(shift=shift)
+
+    context={
+        'title':'Laporan Apel',
+        'apel': report_apel,
+        }
+    return render(request, 'pages/laporan-apel-shift.html', context)
 
 
 # HALAMAN FORM CCTV
