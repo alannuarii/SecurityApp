@@ -10,11 +10,11 @@
           {% csrf_token %}
           <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Periode Jadwal</label>
-            <input type="month" class="form-control form-control-lg" id="exampleFormControlInput1" name="periode" />
+            <input type="month" class="form-control form-control-lg" id="exampleFormControlInput1" name="periode" required />
           </div>
           <div class="mb-3">
             <label for="formFileLg" class="form-label">Upload Jadwal Security</label>
-            <input class="form-control form-control-lg" id="formFileLg" type="file" name="foto" />
+            <input class="form-control form-control-lg" id="formFileLg" type="file" name="foto" required />
           </div>
           <div class="d-flex justify-content-center">
             <input type="button" value="Reset" class="btn btn-secondary bg-gradient me-1" id="sig-clearBtn" />
