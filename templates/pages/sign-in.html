@@ -15,7 +15,7 @@
           {% csrf_token %}
           <h1 class="h3 mb-3 fw-normal">SecurityApp</h1>
           {% if messages %}{% for msg in messages %}
-          <div class="alert alert-danger" role="alert">
+          <div class="alert alert-danger rounded-4" role="alert">
             <i class="bi-exclamation-triangle-fill text-center"></i>
             <h6 class="text-center">{{msg}}</h6>
           </div>

@@ -4,6 +4,14 @@
 <main class="container form-input">
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
+      <h3 class="text-center border-bottom pb-2 mb-3">FORM PENERIMAAN TAMU</h3>
+      {% if messages %}{% for msg in messages %}
+      <div class="row">
+        <div class="col">
+          <div class="alert alert-danger alert-dismissible fade show text-center mx-3 rounded-4" role="alert"><i class="bi-exclamation-triangle-fill text-center me-2"></i>{{msg}}</div>
+        </div>
+      </div>
+      {% endfor %}{% endif %}
       <div class="card">
         <form action="" method="post">
           {% csrf_token %}
@@ -23,6 +31,7 @@
             <label for="formGroupExampleInput2" class="form-label">Tujuan Berkunjung</label>
             <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Masukkan tujuan berkunjung" name="tujuan" />
           </div>
+          {% comment %}
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">Bertemu siapa?</label>
             <select class="form-select" aria-label="Default select example" name="pegawai">
@@ -32,6 +41,7 @@
               {% endfor %}
             </select>
           </div>
+          {% endcomment %}
           <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Kondisi Kesehatan</label>
             <div class="form-check">

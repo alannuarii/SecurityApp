@@ -4,8 +4,15 @@
 <main class="container form-input">
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
-      <h3 class="text-center border-bottom pb-2">FORM INPUT PATROLI</h3>
-      <div class="card mt-4">
+      <h3 class="text-center border-bottom pb-2 mb-3">FORM INPUT PATROLI</h3>
+      {% if messages %}{% for msg in messages %}
+      <div class="row">
+        <div class="col">
+          <div class="alert alert-danger alert-dismissible fade show text-center mx-3 rounded-4" role="alert"><i class="bi-exclamation-triangle-fill text-center me-2"></i>{{msg}}</div>
+        </div>
+      </div>
+      {% endfor %}{% endif %}
+      <div class="card">
         <form action="" method="post">
           {% csrf_token %}
           <div class="mb-3">

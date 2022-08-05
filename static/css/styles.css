@@ -80,7 +80,7 @@ main {
   font-size: 30px;
 }
 .sign-in .alert h6 {
-  font-size: 13px;
+  font-size: 15px;
 }
 .sign-in .copyright {
   font-size: 10px;
@@ -164,7 +164,7 @@ main {
 .form-input .card-jadwal {
   padding: 100px 70px;
 }
-
+ 
 /* EMERGENCY CALL*/
 .emergency-call .card .card-header {
   height: 100px;

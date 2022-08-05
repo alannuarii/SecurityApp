@@ -35,7 +35,7 @@ def sign_in(request):
             login(request, user)
             return redirect('/')
         else:
-            messages.error(request, 'Username atau password Anda tidak tepat')
+            messages.error(request, 'Username atau password Anda salah')
             return redirect('/sign-in')
     
 
@@ -67,26 +67,29 @@ def home(request):
 
 # HALAMAN FORM PENERIMAAN TAMU
 def form_tamu(request):
-    employees = Pegawai.objects.all()
+    # employees = Pegawai.objects.all()
 
     # Insert Data 
     if request.method == 'POST':
-        nama = request.POST['nama']
-        instansi = request.POST['instansi']
-        nohp = request.POST['nohp']
-        tujuan = request.POST['tujuan']
-        pegawai = request.POST['pegawai']
-        kondisi = request.POST['kondisi']
-        foto = request.POST['foto']
-        input = Tamu(nama=nama, instansi=instansi, nohp=nohp, tujuan=tujuan, kondisi=kondisi, foto=base64tojpg1(foto,'Tamu',nama), detail_time=datetime.now() - timedelta(hours=-8))
-        input.real_date()
-        input.save()
-        return redirect('/selamat-datang')
+        try:
+            nama = request.POST['nama']
+            instansi = request.POST['instansi']
+            nohp = request.POST['nohp']
+            tujuan = request.POST['tujuan']
+            kondisi = request.POST['kondisi']
+            foto = request.POST['foto']
+            input = Tamu(nama=nama, instansi=instansi, nohp=nohp, tujuan=tujuan, kondisi=kondisi, foto=base64tojpg1(foto,'Tamu',nama), detail_time=datetime.now() - timedelta(hours=-8))
+            input.real_date()
+            input.save()
+            return redirect('/selamat-datang')
+        except:
+            messages.error(request, 'Data gagal disimpan')
+            return redirect('/form-penerimaan-tamu')
         
     context={
         'title':'Form Penerimaan Tamu',
         'jadwal': jadwal_shift(),
-        'employees': employees
+        # 'employees': employees
     }
     return render(request, 'pages/form-penerimaan-tamu.html', context)
 
@@ -122,19 +125,23 @@ def form_patroli(request):
     names = Security.objects.all()
 
     if request.method == 'POST':
-        detail_time = datetime.now() - timedelta(hours=-8)
-        lokasi = request.POST['lokasi']
-        kondisi = request.POST['kondisi']
-        foto = request.POST['foto']
-        nama_security_id = request.POST['nama_security_id']
-        waktu_jaga = shift(int(detail_time.strftime('%H')))
-        waktu = patroli(int(detail_time.strftime('%H')))
+        try:
+            detail_time = datetime.now() - timedelta(hours=-8)
+            lokasi = request.POST['lokasi']
+            kondisi = request.POST['kondisi']
+            foto = request.POST['foto']
+            nama_security_id = request.POST['nama_security_id']
+            waktu_jaga = shift(int(detail_time.strftime('%H')))
+            waktu = patroli(int(detail_time.strftime('%H')))
 
-        input = Patroli(detail_time=detail_time, lokasi=lokasi, kondisi=kondisi, nama_security_id_id=nama_security_id, shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Patroli',tengah=names[int(nama_security_id)-1].nama_security), waktu=waktu)
-        input.real_date()
-        input.save()
-        # pw.sendwhatmsg_to_group_instantly("BoqTd9gtvEt9ioXc5RqWee", "LAPORAN PATROLI \n{} \nLokasi: {} \nSecurity Patroli: {} \nKondisi: {} \nDetail Laporan: \nhttp://127.0.0.1:8000/laporan-patroli-shift/{}/{}".format(detail_time.strftime('Tanggal %d-%m-%Y Pukul %H:%M WITA'), lokasi, names[int(nama_security_id) - 1].nama_security, kondisi, detail_time.strftime('%Y-%m-%d'), str(waktu)))
-        return redirect('/')
+            input = Patroli(detail_time=detail_time, lokasi=lokasi, kondisi=kondisi, nama_security_id_id=nama_security_id, shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Patroli',tengah=names[int(nama_security_id)-1].nama_security), waktu=waktu)
+            input.real_date()
+            input.save()
+            # pw.sendwhatmsg_to_group_instantly("BoqTd9gtvEt9ioXc5RqWee", "LAPORAN PATROLI \n{} \nLokasi: {} \nSecurity Patroli: {} \nKondisi: {} \nDetail Laporan: \nhttp://127.0.0.1:8000/laporan-patroli-shift/{}/{}".format(detail_time.strftime('Tanggal %d-%m-%Y Pukul %H:%M WITA'), lokasi, names[int(nama_security_id) - 1].nama_security, kondisi, detail_time.strftime('%Y-%m-%d'), str(waktu)))
+            return redirect('/')
+        except:
+            messages.error(request, 'Data gagal disimpan')
+            return redirect('/form-patroli')
 
     context={
         'title':'Form Patroli',
@@ -218,18 +225,22 @@ def form_apel(request):
     names = Security.objects.all()
 
     if request.method == 'POST':
-        nama_security = request.POST.getlist('nama_security_id')
-        for i in range(len(nama_security)):
-            detail_time = datetime.now() - timedelta(hours=-8)
-            atribut = request.POST['atribut']
-            foto = request.POST['foto']
-            nama_security_id = nama_security[i]
-            waktu_jaga = shift(int(detail_time.strftime('%H')))
+        try:
+            nama_security = request.POST.getlist('nama_security_id')
+            for i in range(len(nama_security)):
+                detail_time = datetime.now() - timedelta(hours=-8)
+                atribut = request.POST['atribut']
+                foto = request.POST['foto']
+                nama_security_id = nama_security[i]
+                waktu_jaga = shift(int(detail_time.strftime('%H')))
 
-            input = Apel(detail_time=detail_time, atribut=atribut, nama_security_id_id=nama_security_id, shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Apel',tengah=names[int(nama_security_id)-1].nama_security))
-            input.real_date()
-            input.save()
-        return redirect('/')
+                input = Apel(detail_time=detail_time, atribut=atribut, nama_security_id_id=nama_security_id, shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Apel',tengah=names[int(nama_security_id)-1].nama_security))
+                input.real_date()
+                input.save()
+            return redirect('/')
+        except:
+            messages.error(request, 'Data gagal disimpan')
+            return redirect('/form-apel')
 
     context={
         'title':'Form Apel',
@@ -292,16 +303,20 @@ def form_cctv(request):
     names = Security.objects.all()
 
     if request.method == 'POST':
-        detail_time = datetime.now() - timedelta(hours=-8)
-        nama_security = request.POST.getlist('nama_security_id')
-        kondisi = request.POST['kondisi']
-        lokasi = request.POST['lokasi']
-        waktu_jaga = shift(int(detail_time.strftime('%H')))
+        try:
+            detail_time = datetime.now() - timedelta(hours=-8)
+            nama_security = request.POST.getlist('nama_security_id')
+            kondisi = request.POST['kondisi']
+            lokasi = request.POST['lokasi']
+            waktu_jaga = shift(int(detail_time.strftime('%H')))
 
-        input = CCTV(detail_time=detail_time, kondisi=kondisi, lokasi=lokasi, nama_security=str(nama_security), shift=waktu_jaga)
-        input.real_date()
-        input.save()
-        return redirect('/')
+            input = CCTV(detail_time=detail_time, kondisi=kondisi, lokasi=lokasi, nama_security=str(nama_security), shift=waktu_jaga)
+            input.real_date()
+            input.save()
+            return redirect('/')
+        except:
+            messages.error(request, 'Data gagal disimpan')
+            return redirect('/form-cctv')
 
     context={
         'title':'Form CCTV',
@@ -352,11 +367,15 @@ def laporan_cctv(request):
 def form_jadwal(request):
     
     if request.method == 'POST':
-        foto = request.FILES['foto']
-        periode = request.POST['periode']+'-01'
-        input = Schedule(foto=foto, periode=periode)
-        input.save()
-        return redirect('/')
+        try:
+            foto = request.FILES['foto']
+            periode = request.POST['periode']+'-01'
+            input = Schedule(foto=foto, periode=periode)
+            input.save()
+            return redirect('/')
+        except:
+            messages.error(request, 'Data gagal disimpan')
+            return redirect('/form-jadwal')
 
     context={'title':'Form Jadwal Security'}
     return render(request, 'pages/form-jadwal.html', context)
