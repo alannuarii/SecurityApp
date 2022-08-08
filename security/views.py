@@ -227,16 +227,14 @@ def form_apel(request):
     if request.method == 'POST':
         try:
             nama_security = request.POST.getlist('nama_security_id')
-            for i in range(len(nama_security)):
-                detail_time = datetime.now() - timedelta(hours=-8)
-                atribut = request.POST['atribut']
-                foto = request.POST['foto']
-                nama_security_id = nama_security[i]
-                waktu_jaga = shift(int(detail_time.strftime('%H')))
+            detail_time = datetime.now() - timedelta(hours=-8)
+            atribut = request.POST['atribut']
+            foto = request.POST['foto']
+            waktu_jaga = shift(int(detail_time.strftime('%H')))
 
-                input = Apel(detail_time=detail_time, atribut=atribut, nama_security_id_id=nama_security_id, shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Apel',tengah=names[int(nama_security_id)-1].nama_security))
-                input.real_date()
-                input.save()
+            input = Apel(detail_time=detail_time, atribut=atribut, nama_security=str(nama_security), shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Apel',tengah=str(nama_security)))
+            input.real_date()
+            input.save()
             return redirect('/')
         except:
             messages.error(request, 'Data gagal disimpan')
@@ -400,8 +398,12 @@ def laporan_bulanan_patroli(request,periode):
 @login_required(login_url='sign_in')
 def laporan_bulanan_apel(request,periode):
 
+    bulan = int(periode[5:])
+    laporan = Apel.objects.filter(tanggal__month=bulan)
+
     context={
         'title':'Laporan Bulanan Apel', 
+        'reports':laporan, 
     }
     return render(request, 'pages/laporan-bulanan-apel.html', context)
 

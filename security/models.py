@@ -146,7 +146,7 @@ class Apel(models.Model):
     shift = models.CharField(verbose_name='Shift', max_length=10)
     atribut = models.CharField(verbose_name='Atribut', max_length=200)
     foto = models.ImageField(verbose_name='Foto Apel', upload_to='static/upload/apel')
-    nama_security_id = models.ForeignKey(Security, on_delete=models.CASCADE, verbose_name='Nama Security')
+    nama_security = models.CharField(verbose_name='Nama Secuirty', max_length=100)
 
     def fulldatetime(self): 
         def bulan(month):

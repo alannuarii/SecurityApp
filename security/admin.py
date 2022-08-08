@@ -18,7 +18,7 @@ class PatroliAdmin(admin.ModelAdmin):
     list_display = ('id','tanggal','detail_time','nama_security_id','shift','waktu','lokasi','kondisi','foto')
 
 class ApelAdmin(admin.ModelAdmin):
-    list_display = ('id','tanggal','detail_time','nama_security_id','shift','atribut','foto')
+    list_display = ('id','tanggal','detail_time','nama_security','shift','atribut','foto')
 
 class CCTVAdmin(admin.ModelAdmin):
     list_display = ('id','tanggal','detail_time','nama_security','shift','lokasi','kondisi')
