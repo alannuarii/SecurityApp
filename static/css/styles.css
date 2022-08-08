@@ -164,7 +164,7 @@ main {
 .form-input .card-jadwal {
   padding: 100px 70px;
 }
- 
+
 /* EMERGENCY CALL*/
 .emergency-call .card .card-header {
   height: 100px;
@@ -198,6 +198,34 @@ main {
 .laporan-patroli-shift .card-1 {
   padding: 20px 50px;
   border-radius: 20px;
+}
+
+/* LAPORAN BULANAN */
+.laporan-bulanan {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.laporan-bulanan .logopln {
+  width: fit-content;
+}
+.laporan-bulanan img {
+  width: 50px;
+}
+.laporan-bulanan .pln {
+  width: fit-content;
+  margin-left: -15px;
+}
+.laporan-bulanan h6 {
+  font-size: 13px;
+  margin-bottom: 1px;
+}
+.laporan-bulanan .judul h6 {
+  font-size: 15px;
+  margin-bottom: 3px;
+  font-weight: 700;
+}
+.laporan-bulanan table {
+  font-size: 13px;
 }
 
 /* FOR MOBILE  */

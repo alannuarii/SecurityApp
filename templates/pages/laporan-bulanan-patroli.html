@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'includes/styles.html' %} {% block title %}
+    <title>{{title}}</title>
+    {% endblock title %}
+    <!-- Favicons -->
+    <link href="{% static 'img/encrypted.png' %}" rel="icon" />
+  </head>
+  <body>
+    {% block content %}
+    <main class="container laporan-bulanan">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row mb-4">
+            <div class="logopln">
+              <img src="{% static 'img/logopln.png' %}" class="img-fluid" alt="" />
+            </div>
+            <div class="pln">
+              <h6>PT PLN (PERSERO)</h6>
+              <h6>UIKL SULAWESI</h6>
+              <h6>UPDK MINAHASA</h6>
+              <h6>ULPLTD KOTAMOBAGU</h6>
+            </div>
+          </div>
+          <div class="text-center mb-3 judul">
+            <h6>LAPORAN KEGIATAN PATROLI SATUAN PENGAMANAN</h6>
+            <h6>UNIT LAYANAN PLTD KOTAMOBAGU</h6>
+            <h6>PERIODE BULAN {{reports.0.transmonth|upper}} {{reports.0.detail_time|date:'Y'}}</h6>
+          </div>
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <th scope="col" class="align-middle">No</th>
+                <th scope="col" class="align-middle">Tanggal</th>
+                <th scope="col" class="align-middle">Nama Security</th>
+                <th scope="col" class="align-middle">Shift</th>
+                <th scope="col" class="align-middle">Waktu Patroli</th>
+                <th scope="col" class="align-middle">Lokasi Patroli</th>
+                <th scope="col" class="align-middle">Kondisi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for report in reports %}
+              <tr>
+                <td class="align-middle">{{forloop.counter}}</td>
+                <td class="align-middle">{{report.tanggal|date:'d-m-Y'}}</td>
+                <td class="align-middle">{{report.nama_security_id.nama_security}}</td>
+                <td class="align-middle">{{report.shift}}</td>
+                <td class="align-middle">{{report.detail_time|time:'H:i'}}</td>
+                <td class="align-middle">{{report.lokasi}}</td>
+                <td class="align-middle">{{report.kondisi}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    {% endblock content %}{% include 'includes/preloader.html' %}{% include 'includes/scripts.html' %}
+  </body>
+</html>

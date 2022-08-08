@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %} {% block title %}
+<title>{{title}}</title>
+{% endblock title %} {% block content %}
+<main class="container selamat-datang">
+  <div class="row text-center mb-4">
+    <h5 class="mb-3">Hi, {{tamu.nama}}</h5>
+    <h1 class="fw-bolder">SELAMAT DATANG</h1>
+    <h2 class="fw-bolder">DI ULPLTD KOTAMOBAGU</h2>
+    <h4>Kapasitas 8000 kW</h4>
+  </div>
+  <div class="row mb-5">
+    <a href="https://pltdktm.daengveloper.com/" target="_blank" class="btn btn-lg btn-primary bg-gradient w-75 mx-auto"><i class="bi-lightning"></i> Company Profile</a>
+  </div>
+  <div class="row d-flex justify-content-center mb-5">
+    <div>
+      <ul class="list-group mx-auto">
+        <li class="list-group-item text-bg-danger text-center fw-bolder text-">TAMU WAJIB</li>
+        <li class="list-group-item">MENGGUNAKAN ALAT PELINDUNG DIRI (APD) YANG TELAH DITETAPKAN PADA LOKASI KERJA DAN JENIS PEKERJAAN</li>
+        <li class="list-group-item">SELALU DIDAMPINGI PEMANDU/PENGAWAS DARI PT PLN (PERSERO) ULPLTD KOTAMOBAGU DAN MENTAATI RAMBU-RAMBU KESELAMATAN YANG TERSEDIA</li>
+        <li class="list-group-item">MENGGUNAKAN PAKAIAN YANG SOPAN DAN AMAN DISETIAP LOKASI KERJA</li>
+        <li class="list-group-item">BILA TERJADI KEADAAN DARURAT SEGERA MENUJU TEMPAT BERKUMPUL (ASSEMBLY POINT) YANG TELAH DITENTUKAN</li>
+      </ul>
+    </div>
+  </div>
+  <hr />
+  <div class="row cp">
+    <div class="col d-flex align-items-start">
+      <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+        <i class="bi-telephone"></i>
+      </div>
+      <div>
+        <h5>Alan Nuari</h5>
+        <p>Pejabat Pelaksana K3L dan Keamanan</p>
+        <a href="https://wa.me/+6285340029197" target="_blank" class="btn btn-success"><i class="bi-whatsapp"></i> +6285340029197 </a>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}

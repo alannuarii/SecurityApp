@@ -81,7 +81,7 @@ class Patroli(models.Model):
     shift = models.CharField(verbose_name='Shift', max_length=10)
     waktu = models.IntegerField(verbose_name='Waktu Patroli')
     lokasi = models.CharField(verbose_name='Lokasi', max_length=200)
-    kondisi = models.CharField(verbose_name='Kondisi Kesehatan', max_length=200)
+    kondisi = models.CharField(verbose_name='Kondisi', max_length=200)
     foto = models.ImageField(verbose_name='Foto Security', upload_to='static/upload/security_patroli')
     nama_security_id = models.ForeignKey(Security, on_delete=models.CASCADE, verbose_name='Nama Security')
 
@@ -103,6 +103,34 @@ class Patroli(models.Model):
         trans_bulan = Translator().translate(str_bulan, src='en', dest='id')
         result = str_tanggal.strftime('{}, %d {} %Y %H:%M WITA'.format(trans_hari.text, bulan(trans_bulan.text)))
         return result
+
+    def transmonth(self):
+        month = self.detail_time
+        str_month = month.strftime('%m')
+        if str_month == '01':
+            return 'Januari'
+        elif str_month == '02':
+            return 'Februari'
+        elif str_month == '03':
+            return 'Maret'
+        elif str_month == '04':
+            return 'April'
+        elif str_month == '05':
+            return 'Mei'
+        elif str_month == '06':
+            return 'Juni'
+        elif str_month == '07':
+            return 'Juli'
+        elif str_month == '08':
+            return 'Agustus'
+        elif str_month == '09':
+            return 'September'
+        elif str_month == '10':
+            return 'Oktober'
+        elif str_month == '11':
+            return 'November'
+        elif str_month == '12':
+            return 'Desember'
 
     def real_date(self):
         self.tanggal = self.detail_time.date()

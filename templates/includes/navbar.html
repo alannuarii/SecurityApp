@@ -23,9 +23,6 @@
           <a class="nav-link" href="{% url 'jadwal_security' %}">Jadwal Security</a>
         </li>
         <li class="nav-item py-2 border-bottom">
-          <a class="nav-link" href="#">Summary Report</a>
-        </li>
-        <li class="nav-item py-2 border-bottom">
           <a class="nav-link" href="{% url 'buku_tamu' %}">Buku Tamu</a>
         </li>
         <li class="nav-item py-2 border-bottom">
@@ -35,7 +32,7 @@
           <a class="nav-link" href="{% url 'laporan_apel' %}">Laporan Apel</a>
         </li>
         <li class="nav-item py-2 border-bottom">
-          <a class="nav-link" href="{% url 'laporan_cctv' %}">CCTV</a>
+          <a class="nav-link" href="{% url 'laporan_cctv' %}">Laporan CCTV</a>
         </li>
         <!-- <li class="nav-item py-2 border-bottom dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Apel</a>
@@ -46,7 +43,11 @@
         </li> -->
       </ul>
       <div class="d-flex justify-content-center mt-4 d-lg-none">
+        {% if user.username != '' %}
         <a href="{% url 'sign_out' %}" class="btn btn-secondary bg-gradient" type="submit"><i class="bi-box-arrow-right me-2"></i>Sign Out</a>
+        {% else %}
+        <a href="{% url 'sign_in' %}" class="btn btn-secondary bg-gradient" type="submit"><i class="bi-box-arrow-right me-2"></i>Sign In</a>
+        {% endif %}
       </div>
       <div class="btn btn-secondary bg-gradient ms-auto btn-offcanvas" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"><i class="bi-card-text me-2"></i>Menu</div>
     </div>

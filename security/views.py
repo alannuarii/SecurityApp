@@ -18,7 +18,7 @@ def sign_in(request):
         'title':'Sign In',
         }
 
-    user = None
+    # user = None
     
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -360,6 +360,60 @@ def laporan_cctv(request):
         'shift_sore': shift_sore,
         }
     return render(request, 'pages/laporan-cctv.html', context)
+
+
+# LAPORAN BULANAN 
+@login_required(login_url='sign_in')
+def laporan_bulanan(request):
+
+    if request.method == 'POST':
+        laporan = request.POST['laporan']
+        periode = request.POST['periode']
+        if laporan == 'laporan-patroli':
+            return redirect('/laporan-bulanan-patroli/{}'.format(periode))
+        elif laporan == 'laporan-apel':
+            return redirect('/laporan-bulanan-apel/{}'.format(periode))
+        elif laporan == 'laporan-cctv':
+            return redirect('/laporan-bulanan-cctv/{}'.format(periode))
+
+    context={
+        'title':'Laporan Bulanan', 
+    }
+    return render(request, 'pages/laporan-bulanan.html', context)
+
+
+# LAPORAN BULANAN PATROLI
+@login_required(login_url='sign_in')
+def laporan_bulanan_patroli(request,periode):
+
+    bulan = int(periode[5:])
+    laporan = Patroli.objects.filter(tanggal__month=bulan)
+
+    context={
+        'title':'Laporan Bulanan Patroli',
+        'reports':laporan, 
+    }
+    return render(request, 'pages/laporan-bulanan-patroli.html', context)
+
+
+# LAPORAN BULANAN APEL
+@login_required(login_url='sign_in')
+def laporan_bulanan_apel(request,periode):
+
+    context={
+        'title':'Laporan Bulanan Apel', 
+    }
+    return render(request, 'pages/laporan-bulanan-apel.html', context)
+
+
+# LAPORAN BULANAN CCTV
+@login_required(login_url='sign_in')
+def laporan_bulanan_cctv(request,periode):
+
+    context={
+        'title':'Laporan Bulanan CCTV', 
+    }
+    return render(request, 'pages/laporan-bulanan-cctv.html', context)
 
 
 # HALAMAN INPUT JADWAL SECURITY
