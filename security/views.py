@@ -101,13 +101,10 @@ def buku_tamu(request):
     
     if 'bulan' in request.GET:
         query = request.GET.get('bulan')
-        str_date = query+'-01'
-        to_datetime = datetime.strptime(str_date, "%Y-%m-%d").date()
-        last_datetime = to_datetime + timedelta(days=30)
+        bulan = int(query[5:])
         
-        # guests = Tamu.objects.order_by('-id').filter(tanggal__range=(to_datetime, last_datetime))
         # Setup Pagination
-        p = Paginator(Tamu.objects.order_by('-id').filter(tanggal__range=(to_datetime, last_datetime)), 2)
+        p = Paginator(Tamu.objects.order_by('-id').filter(tanggal__month=bulan), 7)
         page = request.GET.get('page')
         tamus = p.get_page(page)
 
@@ -232,6 +229,10 @@ def form_apel(request):
             foto = request.POST['foto']
             waktu_jaga = shift(int(detail_time.strftime('%H')))
 
+            if len(nama_security) > 2:
+                messages.error(request, 'Tidak boleh lebih dari 2 nama')
+                return redirect('/form-apel')
+
             input = Apel(detail_time=detail_time, atribut=atribut, nama_security=str(nama_security), shift=waktu_jaga, foto=base64tojpg1(fotobase64=foto,depan='Apel',tengah=str(nama_security)))
             input.real_date()
             input.save()
@@ -307,6 +308,10 @@ def form_cctv(request):
             kondisi = request.POST['kondisi']
             lokasi = request.POST['lokasi']
             waktu_jaga = shift(int(detail_time.strftime('%H')))
+
+            if len(nama_security) > 2:
+                messages.error(request, 'Tidak boleh lebih dari 2 nama')
+                return redirect('/form-cctv')
 
             input = CCTV(detail_time=detail_time, kondisi=kondisi, lokasi=lokasi, nama_security=str(nama_security), shift=waktu_jaga)
             input.real_date()
@@ -412,8 +417,12 @@ def laporan_bulanan_apel(request,periode):
 @login_required(login_url='sign_in')
 def laporan_bulanan_cctv(request,periode):
 
+    bulan = int(periode[5:])
+    laporan = CCTV.objects.filter(tanggal__month=bulan)
+
     context={
         'title':'Laporan Bulanan CCTV', 
+        'reports':laporan, 
     }
     return render(request, 'pages/laporan-bulanan-cctv.html', context)
 

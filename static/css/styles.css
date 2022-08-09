@@ -328,4 +328,9 @@ main {
   .jadwal-security .jadwal {
     display: none;
   }
+
+  /* LAPORAN BULANAN  */
+  .laporan-bulanan .judul h6 {
+    font-size: 13px;
+  }
 }

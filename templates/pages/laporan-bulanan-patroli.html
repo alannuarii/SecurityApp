@@ -29,32 +29,34 @@
             <h6>UNIT LAYANAN PLTD KOTAMOBAGU</h6>
             <h6>PERIODE BULAN {{reports.0.transmonth|upper}} {{reports.0.detail_time|date:'Y'}}</h6>
           </div>
-          <table class="table table-bordered text-center">
-            <thead>
-              <tr>
-                <th scope="col" class="align-middle">No</th>
-                <th scope="col" class="align-middle">Tanggal</th>
-                <th scope="col" class="align-middle">Nama Security</th>
-                <th scope="col" class="align-middle">Shift</th>
-                <th scope="col" class="align-middle">Waktu Patroli</th>
-                <th scope="col" class="align-middle">Lokasi Patroli</th>
-                <th scope="col" class="align-middle">Kondisi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for report in reports %}
-              <tr>
-                <td class="align-middle">{{forloop.counter}}</td>
-                <td class="align-middle">{{report.tanggal|date:'d-m-Y'}}</td>
-                <td class="align-middle">{{report.nama_security_id.nama_security}}</td>
-                <td class="align-middle">{{report.shift}}</td>
-                <td class="align-middle">{{report.detail_time|time:'H:i'}}</td>
-                <td class="align-middle">{{report.lokasi}}</td>
-                <td class="align-middle">{{report.kondisi}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table table-bordered text-center">
+              <thead>
+                <tr>
+                  <th scope="col" class="align-middle">No</th>
+                  <th scope="col" class="align-middle">Tanggal</th>
+                  <th scope="col" class="align-middle">Nama Security</th>
+                  <th scope="col" class="align-middle">Shift</th>
+                  <th scope="col" class="align-middle">Waktu Patroli</th>
+                  <th scope="col" class="align-middle">Lokasi Patroli</th>
+                  <th scope="col" class="align-middle">Kondisi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for report in reports %}
+                <tr>
+                  <td class="align-middle">{{forloop.counter}}</td>
+                  <td class="align-middle">{{report.tanggal|date:'d-m-Y'}}</td>
+                  <td class="align-middle">{{report.nama_security_id.nama_security}}</td>
+                  <td class="align-middle">{{report.shift}}</td>
+                  <td class="align-middle">{{report.detail_time|time:'H:i'}}</td>
+                  <td class="align-middle">{{report.lokasi}}</td>
+                  <td class="align-middle">{{report.kondisi}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </main>
