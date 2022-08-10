@@ -50,6 +50,10 @@
       <a href="{% url 'emergency_call' %}" class="card rounded-circle btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-telephone-forward text-light"></i></a>
       <h6 class="text-center mt-2">Emergency Call</h6>
     </div>
+    <div class="col-6 col-lg-4 mb-4 mb-lg-0 emergency">
+      <div class="card rounded-circle btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient" data-bs-toggle="modal" data-bs-target="#modal-emergency"><i class="bi-telephone-forward text-light"></i></div>
+      <h6 class="text-center mt-2">Emergency Call</h6>
+    </div>
     <div class="col-6 col-lg-4 mb-4 mb-lg-0">
       <a href="{% url 'sop' %}" class="card rounded-circle btn d-flex justify-content-center align-items-center mx-auto bg-primary bg-gradient"><i class="bi-check2-circle text-light"></i></a>
       <h6 class="text-center mt-2">SOP</h6>
@@ -94,6 +98,19 @@
     </div>
   </div>
   <!-- Akhir Modal Selesai Patroli  -->
+  <!-- Awal Modal Emergency Call  -->
+  <div class="modal fade" id="modal-emergency" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center position-relative">
+          <button type="button" class="btn-close position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          <i class="bi-exclamation-triangle-fill text-warning"></i>
+          <h4>Akses menggunakan mobile phone</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Akhir Modal Emergency Call  -->
   <script>
     const wa = document.querySelector(".home .bi-whatsapp");
     const sendWA = document.querySelector(".send-wa");

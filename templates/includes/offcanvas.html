@@ -6,6 +6,9 @@
   <div class="offcanvas-body">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="py-3 border-bottom dropdown">
+        <a href="/" class="text-decoration-none text-light">Beranda</a>
+      </li>
+      <li class="py-3 border-bottom dropdown">
         <a href="#collapse1" class="text-decoration-none text-light" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">Jadwal Security <i class="bi-caret-down-fill align-middle"></i></a>
         <div class="collapse" id="collapse1">
           <div class="list-group mt-2">
@@ -15,8 +18,27 @@
         </div>
       </li>
       <li class="py-3 border-bottom dropdown">
+        <a href="{% url 'buku_tamu' %}" class="text-decoration-none text-light">Buku Tamu</a>
+      </li>
+      <li class="py-3 border-bottom dropdown">
+        <a href="{% url 'laporan_patroli' %}" class="text-decoration-none text-light">Laporan Patroli</a>
+      </li>
+      <li class="py-3 border-bottom dropdown">
+        <a href="{% url 'laporan_apel' %}" class="text-decoration-none text-light">Laporan Apel</a>
+      </li>
+      <li class="py-3 border-bottom dropdown">
+        <a href="{% url 'laporan_cctv' %}" class="text-decoration-none text-light">Laporan CCTV</a>
+      </li>
+      <li class="py-3 border-bottom dropdown">
         <a href="{% url 'laporan_bulanan' %}" class="text-decoration-none text-light">Laporan Bulanan</a>
       </li>
     </ul>
+    <div class="d-flex justify-content-center mt-4">
+      {% if user.username != '' %}
+      <a href="{% url 'sign_out' %}" class="btn btn-secondary bg-gradient" type="submit"><i class="bi-box-arrow-right me-2"></i>Sign Out</a>
+      {% else %}
+      <a href="{% url 'sign_in' %}" class="btn btn-secondary bg-gradient" type="submit"><i class="bi-box-arrow-right me-2"></i>Sign In</a>
+      {% endif %}
+    </div>
   </div>
 </div>

@@ -277,6 +277,9 @@ main {
   .home .alert .bi-whatsapp {
     font-size: 30px;
   }
+  .home .emergency {
+    display: none;
+  }
   .bot-navbar .container-fluid {
     height: 35px;
   }
